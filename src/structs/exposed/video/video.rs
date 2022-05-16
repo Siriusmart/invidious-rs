@@ -2,7 +2,7 @@
 
 use crate::{
     structs::hidden::{
-        AdaptiveFormat, AuthorThumbnail, Caption, FormatStream, VideoShort, VideoThumbnail,
+        AdaptiveFormat, AuthorThumbnail, Caption, FormatStream, VideoShort, VideoThumbnail, CountryCode,
     },
     traits::PublicItems,
 };
@@ -27,7 +27,7 @@ pub struct Video {
     pub paid: bool,
     pub premium: bool,
     pub isFamilyFriendly: bool,
-    pub allowedRegions: Vec<String>,
+    pub allowedRegions: Vec<CountryCode>,
     pub genre: String,
     pub genreserverUrl: Option<String>,
 

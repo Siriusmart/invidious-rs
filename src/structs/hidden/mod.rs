@@ -14,6 +14,7 @@ mod trendingvideo;
 mod videoshort;
 mod videothumbnail;
 mod mix;
+mod countrycodes;
 
 pub use adaptiveformat::*;
 pub use authorthumbnail::*;
@@ -31,3 +32,4 @@ pub use trendingvideo::*;
 pub use videoshort::*;
 pub use videothumbnail::*;
 pub use mix::*;
+pub use countrycodes::*;

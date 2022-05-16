@@ -1,6 +1,6 @@
 [package]
 name = "invidious"
-version = "0.1.0"
+version = "0.2.0"
 edition = "2021"
 authors = ["Siriusmart<siriusmart@tuta.io>"]
 description = "Get information about videos from YouTube with this simple Invidious API wrapper."
@@ -13,9 +13,9 @@ repository = "https://github.com/Siriusmart/invidious-rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [dependencies]
-reqwest = {version = "0.11.10", features = ["blocking"]}
-serde = {version = "1.0.136", features = ["derive"]}
-serde_json = "1.0.59"
+reqwest = {version = "0.11", features = ["blocking"]}
+serde = {version = "1.0", features = ["derive"]}
+serde_json = "1.0"
 
 [dev-dependencies]
 tokio = {version = "1", features = ["macros"]} # For running doc test

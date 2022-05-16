@@ -1,8 +1,9 @@
 use crate::{
     structs::{channel::*, universal::*, video::*},
-    traits::*,
 };
 use std::error::Error;
+
+use super::functions::*;
 
 /// Main struct of the library with all the functions to interact with the Invidious API (Async).
 ///
@@ -33,10 +34,11 @@ use std::error::Error;
 ///
 /// * Reqest: Failed to connect to the Invidious instance.
 /// * Serde_json: Failed to parse the response from the Invidious instance. This is most likely caused by an invalid response from the Invidious instance, such as an error message from the server (which is not in an expected JSON structure), or the Invidious API is returning a JSON with a different structure than the expected JSON in their documentation (most of their responses are, but I made it work by changing the expected structure of the response, also this is not the crate's fault it Invidious' problem).
+/// * InvidiousError: Invalid request (For example, an id of an invalid video)
 
 #[derive(Debug, Clone)]
 pub struct Client {
-    server: String,
+    pub server: String,
 }
 
 impl Client {
@@ -88,10 +90,7 @@ impl Client {
     /// # Additional arguments
     /// (No additional arguments)
     pub fn stats(&self, args: Option<&str>) -> Result<Stats, Box<dyn Error>> {
-        let body =
-            reqwest::blocking::get(Stats::url(&self.server, url_args(None, args)))?.text()?;
-        let stats = Stats::from_str(&body)?;
-        Ok(stats)
+        stats(&self.server, args)
     }
 
     /// Get information about a video.
@@ -111,11 +110,7 @@ impl Client {
     /// # Additional arguments
     /// * `region`: ISO 3166 country code (default: `US`)
     pub fn video(&self, video_id: &str, args: Option<&str>) -> Result<Video, Box<dyn Error>> {
-        let body =
-            reqwest::blocking::get(Video::url(&self.server, url_args(Some(video_id), args)))?
-                .text()?;
-        let video = Video::from_str(&body)?;
-        Ok(video)
+        video(&self.server, video_id, args)
     }
 
     /// Get comments of a video.
@@ -135,12 +130,12 @@ impl Client {
     /// # Additional arguments
     /// * `sort_by`: `top`, `new` (default: `top`)
     /// * `source`: `youtube`, `reddit` (default: `youtube`)
-    pub fn comments(&self, video_id: &str, args: Option<&str>) -> Result<Comments, Box<dyn Error>> {
-        let body =
-            reqwest::blocking::get(Comments::url(&self.server, url_args(Some(video_id), args)))?
-                .text()?;
-        let comments = Comments::from_str(&body)?;
-        Ok(comments)
+    pub fn comments(
+        &self,
+        video_id: &str,
+        args: Option<&str>,
+    ) -> Result<Comments, Box<dyn Error>> {
+        comments(&self.server, video_id, args)
     }
 
     /// Get captions of a video.
@@ -165,12 +160,12 @@ impl Client {
     /// * `lang`:  String
     /// * `tlang`: String
     /// * `region`: ISO 3166 country code (default: `US`)
-    pub fn captions(&self, video_id: &str, args: Option<&str>) -> Result<Captions, Box<dyn Error>> {
-        let body =
-            reqwest::blocking::get(Captions::url(&self.server, url_args(Some(video_id), args)))?
-                .text()?;
-        let captions = Captions::from_str(&body)?;
-        Ok(captions)
+    pub fn captions(
+        &self,
+        video_id: &str,
+        args: Option<&str>,
+    ) -> Result<Captions, Box<dyn Error>> {
+        captions(&self.server, video_id, args)
     }
 
     /// Get videos on the trending page (Same as on YouTube).
@@ -192,10 +187,7 @@ impl Client {
     /// * `type`: `music`, `gaming`, `news`, `movies`
     /// * `region`: ISO 3166 country code (default: `US`)
     pub fn trending(&self, args: Option<&str>) -> Result<Trending, Box<dyn Error>> {
-        let body =
-            reqwest::blocking::get(Trending::url(&self.server, url_args(None, args)))?.text()?;
-        let videos = Trending::from_str(&body)?;
-        Ok(videos)
+        trending(&self.server, args)
     }
 
     /// Get videos on the popular page (Same as on YouTube).
@@ -215,10 +207,7 @@ impl Client {
     /// # Additional arguments
     /// (No additional arguments)
     pub fn popular(&self, args: Option<&str>) -> Result<Popular, Box<dyn Error>> {
-        let body =
-            reqwest::blocking::get(Popular::url(&self.server, url_args(None, args)))?.text()?;
-        let videos = Popular::from_str(&body)?;
-        Ok(videos)
+        popular(&self.server, args)
     }
 
     /// Get channel information
@@ -243,10 +232,7 @@ impl Client {
     ///
     /// * `sort_by`: `newest`, `oldest`, `popular` (default: `newest`)
     pub fn channel(&self, id: &str, args: Option<&str>) -> Result<Channel, Box<dyn Error>> {
-        let body =
-            reqwest::blocking::get(Channel::url(&self.server, url_args(Some(id), args)))?.text()?;
-        let channel = Channel::from_str(&body)?;
-        Ok(channel)
+        channel(&self.server, id, args)
     }
 
     /// Get videos of a channel.
@@ -271,11 +257,7 @@ impl Client {
         id: &str,
         args: Option<&str>,
     ) -> Result<ChannelVideos, Box<dyn Error>> {
-        let body =
-            reqwest::blocking::get(ChannelVideos::url(&self.server, url_args(Some(id), args)))?
-                .text()?;
-        let videos = ChannelVideos::from_str(&body)?;
-        Ok(videos)
+        channel_videos(&self.server, id, args)
     }
 
     /// Get playlists of a channel.
@@ -300,13 +282,7 @@ impl Client {
         id: &str,
         args: Option<&str>,
     ) -> Result<ChannelPlaylists, Box<dyn Error>> {
-        let body = reqwest::blocking::get(ChannelPlaylists::url(
-            &self.server,
-            url_args(Some(id), args),
-        ))?
-        .text()?;
-        let playlists = ChannelPlaylists::from_str(&body)?;
-        Ok(playlists)
+        channel_playlists(&self.server, id, args)
     }
 
     /// Get comments of a channel.
@@ -330,11 +306,7 @@ impl Client {
         id: &str,
         args: Option<&str>,
     ) -> Result<ChannelComments, Box<dyn Error>> {
-        let body =
-            reqwest::blocking::get(ChannelComments::url(&self.server, url_args(Some(id), args)))?
-                .text()?;
-        let comments = ChannelComments::from_str(&body)?;
-        Ok(comments)
+        channel_comments(&self.server, id, args)
     }
 
     /// Search anything from the channel.
@@ -359,12 +331,7 @@ impl Client {
         id: &str,
         args: Option<&str>,
     ) -> Result<ChannelSearch, Box<dyn Error>> {
-        let body =
-            reqwest::blocking::get(ChannelSearch::url(&self.server, url_args(Some(id), args)))?
-                .text()?;
-        let search = ChannelSearch::from_str(&body)?;
-
-        Ok(search)
+        channel_search(&self.server, id, args)
     }
 
     /// Search anything in YouTube
@@ -392,10 +359,7 @@ impl Client {
     /// * `region`: ISO 3166 country code (default: `US`)
 
     pub fn search(&self, args: Option<&str>) -> Result<Search, Box<dyn Error>> {
-        let body =
-            reqwest::blocking::get(Search::url(&self.server, url_args(None, args)))?.text()?;
-        let search = Search::from_str(&body)?;
-        Ok(search)
+        search(&self.server, args)
     }
 
     /// Get information of a playlist.
@@ -415,26 +379,13 @@ impl Client {
     /// # Additional arguments
     /// * `page`: Int32
     pub fn playlist(&self, id: &str, args: Option<&str>) -> Result<Playlist, Box<dyn Error>> {
-        let body = reqwest::blocking::get(Playlist::url(&self.server, url_args(Some(id), args)))?
-            .text()?;
-        let playlist = Playlist::from_str(&body)?;
-        Ok(playlist)
+        playlist(&self.server, id, args)
     }
 
     /// Actually I had no idea what this does, but since it is on the Invidious API I decided to include it.
     ///
     /// No examples will be provided because what is a YouTube mix? I'm so confused.
     pub fn mix(&self, id: &str, args: Option<&str>) -> Result<Mix, Box<dyn Error>> {
-        let body =
-            reqwest::blocking::get(Mix::url(&self.server, url_args(Some(id), args)))?.text()?;
-        let mix = Mix::from_str(&body)?;
-        Ok(mix)
-    }
-}
-
-fn url_args(id: Option<&str>, args: Option<&str>) -> String {
-    match args {
-        Some(args) => format!("{}?{}", id.unwrap_or(""), args),
-        None => id.unwrap_or("").to_string(),
+        mix(&self.server, id, args)
     }
 }

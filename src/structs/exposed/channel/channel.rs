@@ -1,7 +1,7 @@
 #![allow(non_snake_case)]
 
 use crate::{
-    structs::hidden::{AuthorBanner, AuthorThumbnail, ChannelVideo, RelatedChannel},
+    structs::hidden::{AuthorBanner, AuthorThumbnail, ChannelVideo, RelatedChannel, CountryCode},
     traits::PublicItems,
 };
 use serde::{Deserialize, Serialize};
@@ -23,7 +23,7 @@ pub struct Channel {
     pub isFamilyFriendly: bool,
     pub description: String,
     pub descriptionHtml: String,
-    pub allowedRegions: Vec<String>,
+    pub allowedRegions: Vec<CountryCode>,
 
     pub latestVideos: Vec<ChannelVideo>,
 

@@ -11,8 +11,8 @@
 //!
 //! fn main() -> Result<(), Box<dyn Error>> {
 //!    let client = Client::new(String::from("https://vid.puffyan.us"));
-//!    // let search_results = client.search("q=rust programming")?.items;
-//!    let video = client.video("_DE-zIbx40Y", None)?;
+//!    let search_results = client.search(Some("q=rust programming"))?.items;
+//!    let video = client.video("5C_HPTJg5ek", None)?;
 //!
 //!   Ok(())
 //! }
@@ -56,3 +56,5 @@ pub mod errors;
 pub mod structs;
 pub mod tests;
 pub mod traits;
+
+pub mod private_functions;

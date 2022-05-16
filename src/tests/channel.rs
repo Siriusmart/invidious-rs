@@ -1,4 +1,4 @@
-use crate::blocking::Client;
+use crate::blocking::{Client};
 
 #[test]
 pub fn channel() {
@@ -9,6 +9,7 @@ pub fn channel() {
 
     for channel in channels.iter() {
         client.channel(channel, None).unwrap();
+        // functions::channel(&client.server, channel, None).unwrap();
     }
 }
 #[test]
