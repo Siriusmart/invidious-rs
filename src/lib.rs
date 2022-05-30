@@ -48,7 +48,14 @@
 //! 
 //! Official documentation of the Invidious API can be found here: <https://docs.invidious.io/api>
 //! 
+//! //! # Patches
+//! 
+//! 0.2.1: Make `init` and `index` in AdaptiveFormat optional because some videos does not have them.
+//! 
 //! # License
+//! 
+//! GNU General Public License v3.0
+
 
 pub mod asynchronous;
 pub mod blocking;

@@ -53,3 +53,7 @@ Official documentation of the Invidious API can be found here: <https://docs.inv
 ## License
 
 License: GPL-3.0
+
+## Patches
+
+0.2.1: Make `init` and `index` in AdaptiveFormat optional because some videos does not have them.

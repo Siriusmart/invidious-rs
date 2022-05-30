@@ -4,9 +4,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct AdaptiveFormat {
-    pub index: String,
+    pub index: Option<String>,
     pub bitrate: String,
-    pub init: String,
+    pub init: Option<String>,
     pub url: String,
     pub itag: String,
     pub r#type: String,
