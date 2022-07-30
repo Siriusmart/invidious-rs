@@ -1,4 +1,4 @@
-use crate::blocking::Client;
+use crate::reqwest::blocking::Client;
 
 #[test]
 fn videos() {

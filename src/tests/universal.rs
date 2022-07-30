@@ -1,4 +1,4 @@
-use crate::blocking::Client;
+use crate::reqwest::blocking::Client;
 
 #[test]
 fn trending() {
@@ -6,19 +6,19 @@ fn trending() {
     let trending = client.trending(None).unwrap();
 
     for item in trending.videos[0..1].iter() {
-        if let Err(e) = client.video(&item.videoId, None) {
+        if let Err(e) = client.video(&item.id, None) {
             println!("{}", e);
             println!("{:#?}", item);
             panic!("failed to get video");
         }
 
-        if let Err(e) = client.comments(&item.videoId, None) {
+        if let Err(e) = client.comments(&item.id, None) {
             println!("{}", e);
             println!("{:#?}", item);
             panic!("failed to get comments");
         }
 
-        if let Err(e) = client.captions(&item.videoId, None) {
+        if let Err(e) = client.captions(&item.id, None) {
             println!("{}", e);
             println!("{:#?}", item);
             panic!("failed to get captions");
@@ -32,19 +32,19 @@ fn popular() {
     let popular = client.popular(None).unwrap();
 
     for item in popular.items[3..4].iter() {
-        if let Err(e) = client.video(&item.videoId, None) {
+        if let Err(e) = client.video(&item.id, None) {
             println!("{}", e);
             println!("{:#?}", item);
             panic!("failed to get video");
         }
 
-        if let Err(e) = client.comments(&item.videoId, None) {
+        if let Err(e) = client.comments(&item.id, None) {
             println!("{}", e);
             println!("{:#?}", item);
             panic!("failed to get comments");
         }
 
-        if let Err(e) = client.captions(&item.videoId, None) {
+        if let Err(e) = client.captions(&item.id, None) {
             println!("{}", e);
             println!("{:#?}", item);
             panic!("failed to get captions");

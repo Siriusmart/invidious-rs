@@ -1,5 +1,3 @@
-#![allow(non_snake_case)]
-
 use crate::structs::hidden::AuthorThumbnail;
 use serde::{Deserialize, Serialize};
 
@@ -12,8 +10,12 @@ pub struct AuthorBanner {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct RelatedChannel {
-    pub author: String,
-    pub authorId: String,
-    pub authorUrl: String,
-    pub authorThumbnails: Vec<AuthorThumbnail>,
+    #[serde(rename(serialize = "author", deserialize = "author"))]
+    pub name: String,
+    #[serde(rename(serialize = "authorId", deserialize = "authorId"))]
+    pub id: String,
+    #[serde(rename(serialize = "authorUrl", deserialize = "authorUrl"))]
+    pub url: String,
+    #[serde(rename(serialize = "authorThumbnails", deserialize = "authorThumbnails"))]
+    pub thumbnails: Vec<AuthorThumbnail>,
 }

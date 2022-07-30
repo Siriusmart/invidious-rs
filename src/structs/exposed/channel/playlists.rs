@@ -1,5 +1,3 @@
-#![allow(non_snake_case)]
-
 use crate::{structs::hidden::Playlist, traits::PublicItems};
 use serde::{Deserialize, Serialize};
 

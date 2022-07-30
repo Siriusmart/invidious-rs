@@ -1,5 +1,3 @@
-#![allow(non_snake_case)]
-
 use crate::{
     structs::hidden::{Metadata, Software, Usage},
     traits::PublicItems,
@@ -10,7 +8,8 @@ use serde::{Deserialize, Serialize};
 pub struct Stats {
     pub version: String,
     pub software: Software,
-    pub openRegistrations: bool,
+    #[serde(rename(serialize = "openRegistrations", deserialize = "openRegistrations"))]
+    pub registrations: bool,
     pub usage: Usage,
     pub metadata: Metadata,
 }

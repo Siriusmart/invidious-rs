@@ -6,3 +6,6 @@ pub mod videos;
 
 #[cfg(test)]
 pub mod channel;
+
+#[cfg(test)]
+pub mod curl;

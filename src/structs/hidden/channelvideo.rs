@@ -1,24 +1,33 @@
-#![allow(non_snake_case)]
-
 use crate::structs::hidden::VideoThumbnail;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ChannelVideo {
     pub title: String,
-    pub videoId: String,
-    pub author: String,
-    pub authorId: String,
-    pub authorUrl: String,
-
-    pub videoThumbnails: Vec<VideoThumbnail>,
-
+    #[serde(rename(serialize = "videoId", deserialize = "videoId"))]
+    pub id: String,
+    #[serde(rename(serialize = "videoThumbnails", deserialize = "videoThumbnails"))]
+    pub thumbnails: Vec<VideoThumbnail>,
     pub description: String,
-    pub descriptionHtml: String,
-    pub viewCount: u64,
+    #[serde(rename(serialize = "descriptionHtml", deserialize = "descriptionHtml"))]
+    pub description_html: String,
+
+    #[serde(rename(serialize = "viewCount", deserialize = "viewCount"))]
+    pub view_count: u64,
     pub published: u64,
-    pub publishedText: String,
-    pub lengthSeconds: u32,
-    pub paid: Option<bool>,
+    #[serde(rename(serialize = "publishedText", deserialize = "publishedText"))]
+    pub published_text: String,
+    #[serde(rename(serialize = "lengthSeconds", deserialize = "lengthSeconds"))]
+    pub length: u32,
+
+    pub author: String,
+    #[serde(rename(serialize = "authorId", deserialize = "authorId"))]
+    pub author_id: String,
+    #[serde(rename(serialize = "authorUrl", deserialize = "authorUrl"))]
+    pub author_url: String,
+
+    #[serde(default)]
+    pub paid: bool,
+    #[serde(default)]
     pub premium: bool,
 }

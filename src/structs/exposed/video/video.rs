@@ -1,5 +1,3 @@
-#![allow(non_snake_case)]
-
 use crate::{
     structs::hidden::{
         AdaptiveFormat, AuthorThumbnail, Caption, FormatStream, VideoShort, VideoThumbnail, CountryCode,
@@ -11,47 +9,71 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Video {
     pub title: String,
-    pub videoId: String,
-    pub videoThumbnails: Vec<VideoThumbnail>,
+    #[serde(rename(serialize = "videoId", deserialize = "videoId"))]
+    pub id: String,
+    #[serde(rename(serialize = "videoThumbnails", deserialize = "videoThumbnails"))]
+    pub thumbnails: Vec<VideoThumbnail>,
 
     pub description: String,
-    pub desceiptionHtml: Option<String>,
+    #[serde(rename(serialize = "descriptionHtml", deserialize = "descriptionHtml"))]
+    pub description_html: Option<String>,
     pub published: u64,
-    pub publishedText: String,
+    #[serde(rename(serialize = "publishedText", deserialize = "publishedText"))]
+    pub published_text: String,
 
     pub keywords: Vec<String>,
-    pub viewCount: u64,
-    pub likeCount: u32,
-    pub dislikeCount: u32,
+    #[serde(rename(serialize = "viewCount", deserialize = "viewCount"))]
+    pub views: u64,
+    #[serde(rename(serialize = "likeCount", deserialize = "likeCount"))]
+    pub likes: u32,
+    #[serde(rename(serialize = "dislikeCount", deserialize = "dislikeCount"))]
+    pub dislikes: u32,
 
     pub paid: bool,
     pub premium: bool,
-    pub isFamilyFriendly: bool,
-    pub allowedRegions: Vec<CountryCode>,
+    #[serde(rename(serialize = "isFamilyFriendly", deserialize = "isFamilyFriendly"))]
+    pub family_friendly: bool,
+    #[serde(rename(serialize = "allowedRegions", deserialize = "allowedRegions"))]
+    pub allowed_regions: Vec<CountryCode>,
     pub genre: String,
-    pub genreserverUrl: Option<String>,
+    #[serde(rename(serialize = "genreserverUrl", deserialize = "genreserverUrl"))]
+    pub genre_server: Option<String>,
 
     pub author: String,
-    pub authorId: String,
-    pub authorUrl: String,
-    pub authorThumbnails: Vec<AuthorThumbnail>,
+    #[serde(rename(serialize = "authorId", deserialize = "authorId"))]
+    pub author_id: String,
+    #[serde(rename(serialize = "authorUrl", deserialize = "authorUrl"))]
+    pub author_url: String,
+    #[serde(rename(serialize = "authorThumbnails", deserialize = "authorThumbnails"))]
+    pub author_thumbnails: Vec<AuthorThumbnail>,
 
-    pub subCountText: String,
-    pub lengthSeconds: u32,
-    pub allowRatings: bool,
+    #[serde(rename(serialize = "subCountText", deserialize = "subCountText"))]
+    pub sub_count_text: String,
+    #[serde(rename(serialize = "lengthSeconds", deserialize = "lengthSeconds"))]
+    pub length: u32,
+    #[serde(rename(serialize = "allowRatings", deserialize = "allowRatings"))]
+    pub allow_ratings: bool,
     pub rating: f32,
-    pub isListed: bool,
-    pub liveNow: bool,
-    pub isUpcoming: bool,
-    pub pemiereTimestamp: Option<u64>,
+    #[serde(rename(serialize = "isListed", deserialize = "isListed"))]
+    pub listed: bool,
+    #[serde(rename(serialize = "liveNow", deserialize = "liveNow"))]
+    pub live: bool,
+    #[serde(rename(serialize = "isUpcoming", deserialize = "isUpcoming"))]
+    pub upcoming: bool,
+    #[serde(rename(serialize = "premiereTimestamp", deserialize = "premiereTimestamp"))]
+    pub premiere: Option<u64>,
 
-    pub hlsserverUrl: Option<String>,
-    pub adaptiveFormats: Vec<AdaptiveFormat>,
-    pub formatStreams: Vec<FormatStream>,
+    #[serde(rename(serialize = "hlsserverUrl", deserialize = "hlsserverUrl"))]
+    pub hls_server: Option<String>,
+    #[serde(rename(serialize = "adaptiveFormats", deserialize = "adaptiveFormats"))]
+    pub adaptive_formats: Vec<AdaptiveFormat>,
+    #[serde(rename(serialize = "formatStreams", deserialize = "formatStreams"))]
+    pub format_streams: Vec<FormatStream>,
 
     pub captions: Vec<Caption>,
 
-    pub recommendedVideos: Vec<VideoShort>,
+    #[serde(rename(serialize = "recommendedVideos", deserialize = "recommendedVideos"))]
+    pub recommended_videos: Vec<VideoShort>,
 }
 
 impl PublicItems for Video {

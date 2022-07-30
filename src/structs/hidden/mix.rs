@@ -1,16 +1,18 @@
-#![allow(non_snake_case)]
-
 use serde::{Deserialize, Serialize};
 use crate::structs::hidden::VideoThumbnail;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct MixVideo {
     title: String,
-      videoId: String,
-      author: String,
-      authorId: String,
-      authorUrl: String,
-      videos: Vec<VideoThumbnail>,
-      index: u32,
-      lengthSeconds: u32
+    #[serde(rename(serialize = "mixId", deserialize = "mixId"))]
+    id: String,
+    #[serde(rename(serialize = "audioId", deserialize = "audioId"))]
+    audio_id: String,
+    author: String,
+    #[serde(rename(serialize = "authorUrl", deserialize = "authorUrl"))]
+    author_url: String,
+    videos: Vec<VideoThumbnail>,
+    index: u32,
+    #[serde(rename(serialize = "lengthSeconds", deserialize = "lengthSeconds"))]
+    length: u32,
 }

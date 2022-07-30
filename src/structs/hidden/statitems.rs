@@ -1,5 +1,3 @@
-#![allow(non_snake_case)]
-
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -17,12 +15,16 @@ pub struct Usage {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Users {
     pub total: u32,
-    pub activeHalfyear: u32,
-    pub activeMonth: u32,
+    #[serde(rename(serialize = "activeHalfyear", deserialize = "activeHalfyear"))]
+    pub half_year: u32,
+    #[serde(rename(serialize = "activeMonth", deserialize = "activeMonth"))]
+    pub month: u32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Metadata {
-    pub updatedAt: u64,
-    pub lastChannelRefreshedAt: u64,
+    #[serde(rename(serialize = "updatedAt", deserialize = "updatedAt"))]
+    pub updated: u64,
+    #[serde(rename(serialize = "lastChannelRefreshedAt", deserialize = "lastChannelRefreshedAt"))]
+    pub last_channel_refresh: u64,
 }

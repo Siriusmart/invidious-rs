@@ -1,5 +1,3 @@
-#![allow(non_snake_case)]
-
 use crate::structs::hidden::VideoThumbnail;
 use serde::{Deserialize, Serialize};
 
@@ -7,16 +5,23 @@ use serde::{Deserialize, Serialize};
 pub struct PopularItem {
     pub r#type: String,
     pub title: String,
-    pub videoId: String,
-    pub videoThumbnails: Vec<VideoThumbnail>,
+    #[serde(rename(serialize = "videoId", deserialize = "videoId"))]
+    pub id: String,
+    #[serde(rename(serialize = "videoThumbnails", deserialize = "videoThumbnails"))]
+    pub thumbnails: Vec<VideoThumbnail>,
 
-    pub lengthSeconds: u32,
-    pub viewCount: u64,
+    #[serde(rename(serialize = "lengthSeconds", deserialize = "lengthSeconds"))]
+    pub length: u32,
+    #[serde(rename(serialize = "viewCount", deserialize = "viewCount"))]
+    pub views: u64,
 
     pub author: String,
-    pub authorId: String,
-    pub authorUrl: String,
+    #[serde(rename(serialize = "authorId", deserialize = "authorId"))]
+    pub author_id: String,
+    #[serde(rename(serialize = "authorUrl", deserialize = "authorUrl"))]
+    pub author_url: String,
 
     pub published: u64,
-    pub publishedText: String,
+    #[serde(rename(serialize = "publishedText", deserialize = "publishedText"))]
+    pub published_text: String,
 }

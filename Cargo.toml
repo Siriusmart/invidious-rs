@@ -1,9 +1,9 @@
 [package]
 name = "invidious"
-version = "0.2.1"
+version = "0.3.0"
 edition = "2021"
 authors = ["Siriusmart<siriusmart@tuta.io>"]
-description = "Get information about videos from YouTube with this simple Invidious API wrapper."
+description = "Get information about videos from YouTube with this simple Invidious API wrapper. Does not use the YouTube API (No tokens required)"
 readme = "README.md"
 license = "GPL-3.0"
 keywords = ["youtube", "invidious", "api", "wrapper"]
@@ -12,8 +12,15 @@ repository = "https://github.com/Siriusmart/invidious-rs"
 
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
+[features]
+default = ["reqwest", "curl", "curl_async"]
+reqwest = ["dep:reqwest"]
+curl = []
+curl_async = ["dep:async-process"]
+
 [dependencies]
-reqwest = {version = "0.11", features = ["blocking"]}
+reqwest = {version = "0.11", features = ["blocking"], optional = true}
+async-process = {version = "1.4", optional = true}
 serde = {version = "1.0", features = ["derive"]}
 serde_json = "1.0"
 

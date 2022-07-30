@@ -9,7 +9,7 @@ use super::functions::*;
 ///
 /// # Examples
 /// ```rust
-/// use invidious::asynchronous::Client;
+/// use invidious::reqwest::asynchronous::Client;
 /// use std::error::Error;
 ///
 /// #[tokio::main]
@@ -47,7 +47,7 @@ impl Client {
     ///
     /// # Examples
     /// ```rust
-    /// # use invidious::asynchronous::Client;
+    /// # use invidious::reqwest::asynchronous::Client;
     /// #
     /// # fn main() {
     /// let client = Client::new(String::from("https://vid.puffyan.us"));
@@ -63,7 +63,7 @@ impl Client {
     ///
     /// # Examples
     /// ```rust
-    /// # use invidious::asynchronous::Client;
+    /// # use invidious::reqwest::asynchronous::Client;
     /// #
     /// # fn main() {
     /// let mut client = Client::new(String::from("https://vid.puffyan.us"));
@@ -78,7 +78,7 @@ impl Client {
     ///
     /// # Examples
     /// ```rust
-    /// # use invidious::asynchronous::Client;
+    /// # use invidious::reqwest::asynchronous::Client;
     /// # use std::error::Error;
     /// #
     /// # #[tokio::main]
@@ -99,7 +99,7 @@ impl Client {
     ///
     /// # Examples
     /// ```rust
-    /// # use invidious::asynchronous::Client;
+    /// # use invidious::reqwest::asynchronous::Client;
     /// # use std::error::Error;
     /// #
     /// # #[tokio::main]
@@ -120,7 +120,7 @@ impl Client {
     ///
     /// # Examples
     /// ```rust
-    /// # use invidious::asynchronous::Client;
+    /// # use invidious::reqwest::asynchronous::Client;
     /// # use std::error::Error;
     /// #
     /// # #[tokio::main]
@@ -146,7 +146,7 @@ impl Client {
     ///
     /// # Examples
     /// ```rust
-    /// # use invidious::asynchronous::Client;
+    /// # use invidious::reqwest::asynchronous::Client;
     /// # use std::error::Error;
     /// #
     /// # #[tokio::main]
@@ -177,7 +177,7 @@ impl Client {
     ///
     /// # Examples
     /// ```rust
-    /// # use invidious::asynchronous::Client;
+    /// # use invidious::reqwest::asynchronous::Client;
     /// # use std::error::Error;
     /// #
     /// # #[tokio::main]
@@ -200,7 +200,7 @@ impl Client {
     ///
     /// # Examples
     /// ```rust
-    /// # use invidious::asynchronous::Client;
+    /// # use invidious::reqwest::asynchronous::Client;
     /// # use std::error::Error;
     /// #
     /// # #[tokio::main]
@@ -225,7 +225,7 @@ impl Client {
     ///
     /// # Examples
     /// ```rust
-    /// # use invidious::asynchronous::Client;
+    /// # use invidious::reqwest::asynchronous::Client;
     /// # use std::error::Error;
     /// #
     /// # #[tokio::main]
@@ -247,7 +247,7 @@ impl Client {
     ///
     /// # Examples
     /// ```rust
-    /// # use invidious::asynchronous::Client;
+    /// # use invidious::reqwest::asynchronous::Client;
     /// # use std::error::Error;
     /// #
     /// # #[tokio::main]
@@ -273,7 +273,7 @@ impl Client {
     ///
     /// # Examples
     /// ```rust
-    /// # use invidious::asynchronous::Client;
+    /// # use invidious::reqwest::asynchronous::Client;
     /// # use std::error::Error;
     /// #
     /// # #[tokio::main]
@@ -299,7 +299,7 @@ impl Client {
     ///
     /// # Examples
     /// ```rust
-    /// # use invidious::asynchronous::Client;
+    /// # use invidious::reqwest::asynchronous::Client;
     /// # use std::error::Error;
     /// #
     /// # #[tokio::main]
@@ -324,7 +324,7 @@ impl Client {
     ///
     /// # Examples
     /// ```rust
-    /// # use invidious::asynchronous::Client;
+    /// # use invidious::reqwest::asynchronous::Client;
     /// # use std::error::Error;
     /// #
     /// # #[tokio::main]
@@ -350,7 +350,7 @@ impl Client {
     ///
     /// # Examples
     /// ```rust
-    /// # use invidious::asynchronous::Client;
+    /// # use invidious::reqwest::asynchronous::Client;
     /// # use std::error::Error;
     /// #
     /// # #[tokio::main]
@@ -379,7 +379,7 @@ impl Client {
     ///
     /// # Examples
     /// ```rust
-    /// # use invidious::asynchronous::Client;
+    /// # use invidious::reqwest::asynchronous::Client;
     /// # use std::error::Error;
     /// #
     /// # #[tokio::main]

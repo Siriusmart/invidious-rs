@@ -1,5 +1,3 @@
-#![allow(non_snake_case)]
-
 use std::error::Error;
 
 use crate::{structs::hidden::TrendingVideo, traits::PublicItems};

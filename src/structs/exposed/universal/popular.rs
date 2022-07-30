@@ -1,5 +1,3 @@
-#![allow(non_snake_case)]
-
 use crate::{structs::hidden::PopularItem, traits::PublicItems};
 use serde::{Deserialize, Serialize, de::DeserializeOwned};
 use serde_json::Value;

@@ -1,20 +1,31 @@
-#![allow(non_snake_case)]
-
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct AdaptiveFormat {
-    pub index: Option<String>,
+    #[serde(default)]
+    pub index: String,
+    #[serde(default)]
     pub bitrate: String,
-    pub init: Option<String>,
+    #[serde(default)]
+    pub init: String,
     pub url: String,
     pub itag: String,
+    #[serde(default)]
     pub r#type: String,
+    #[serde(default)]
     pub clen: String,
+    #[serde(default)]
     pub lmt: String,
-    pub projectionType: String,
-    pub container: Option<String>,
-    pub encoding: Option<String>,
-    pub qualityLabel: Option<String>,
-    pub resolution: Option<String>,
+    #[serde(default)]
+    #[serde(rename(serialize = "protectionType", deserialize = "protectionType"))]
+    pub projection_type: String,
+    #[serde(default)]
+    pub container: String,
+    #[serde(default)]
+    pub encoding: String,
+    #[serde(default)]
+    #[serde(rename(serialize = "qualityLabel", deserialize = "qualityLabel"))]
+    pub quality_label: String,
+    #[serde(default)]
+    pub resolution: String,
 }

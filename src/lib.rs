@@ -6,7 +6,7 @@
 //!
 //! ## Blocking API
 //! ```rust
-//! use invidious::blocking::Client;
+//! use invidious::reqwest::blocking::Client;
 //! use std::error::Error;
 //!
 //! fn main() -> Result<(), Box<dyn Error>> {
@@ -20,7 +20,7 @@
 //!
 //! ## Async API
 //! ```rust
-//! use invidious::asynchronous::Client;
+//! use invidious::reqwest::asynchronous::Client;
 //! use std::error::Error;
 //!
 //! #[tokio::main]
@@ -48,17 +48,23 @@
 //! 
 //! Official documentation of the Invidious API can be found here: <https://docs.invidious.io/api>
 //! 
-//! //! # Patches
-//! 
-//! 0.2.1: Make `init` and `index` in AdaptiveFormat optional because some videos does not have them.
-//! 
+//! # Features
+//!
+//! * `reqwest`: use the reqwest crate to send requests, may increase complie time and size
+//! * `curl`: use the `curl` command to send reqwests, but `curl` may not be present in some systems
+//! * `curl_async`: async support for `curl`, uses external crate which increases compile time and
+//! size
+//!
+//! All features are enabled by default
+//!
 //! # License
 //! 
 //! GNU General Public License v3.0
 
-
-pub mod asynchronous;
-pub mod blocking;
+#[cfg(feature = "reqwest")]
+pub mod reqwest;
+#[cfg(feature = "curl")]
+pub mod curl;
 pub mod errors;
 pub mod structs;
 pub mod tests;

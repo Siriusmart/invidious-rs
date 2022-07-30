@@ -1,13 +1,12 @@
-#![allow(non_snake_case)]
-
 use crate::{structs::hidden::MixVideo, traits::PublicItems};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Mix {
-    title: String,
-    mixId: String,
-    videos: Vec<MixVideo>,
+    pub title: String,
+    #[serde(rename(serialize = "midId", deserialize = "midId"))]
+    pub id: String,
+    pub videos: Vec<MixVideo>,
 }
 
 impl PublicItems for Mix {
