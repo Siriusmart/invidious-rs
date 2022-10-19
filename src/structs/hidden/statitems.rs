@@ -25,6 +25,9 @@ pub struct Users {
 pub struct Metadata {
     #[serde(rename(serialize = "updatedAt", deserialize = "updatedAt"))]
     pub updated: u64,
-    #[serde(rename(serialize = "lastChannelRefreshedAt", deserialize = "lastChannelRefreshedAt"))]
+    #[serde(rename(
+        serialize = "lastChannelRefreshedAt",
+        deserialize = "lastChannelRefreshedAt"
+    ))]
     pub last_channel_refresh: u64,
 }

@@ -1,5 +1,5 @@
 use crate::{
-    structs::hidden::{AuthorBanner, AuthorThumbnail, ChannelVideo, RelatedChannel, CountryCode},
+    structs::hidden::{AuthorBanner, AuthorThumbnail, ChannelVideo, CountryCode, RelatedChannel},
     traits::PublicItems,
 };
 use serde::{Deserialize, Serialize};
@@ -42,6 +42,6 @@ pub struct Channel {
 
 impl PublicItems for Channel {
     fn url(server: &str, args: String) -> String {
-        format!("{}/api/v1/channels/{}", server, args)
+        format!("{server}/api/v1/channels/{args}")
     }
 }

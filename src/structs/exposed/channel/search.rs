@@ -4,7 +4,7 @@ use crate::{
     structs::hidden::{SearchItem, SearchItemTransition},
     traits::PublicItems,
 };
-use serde::{Deserialize, Serialize, de::DeserializeOwned};
+use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::Value;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -19,7 +19,7 @@ impl PublicItems for ChannelSearch {
 
     fn from_value(value: Value) -> Result<Self, Box<dyn Error>>
     where
-        Self: Sized + DeserializeOwned, 
+        Self: Sized + DeserializeOwned,
     {
         let search_transition: Vec<SearchItemTransition> = serde_json::from_value(value)?;
         let items: Vec<SearchItem> = search_transition

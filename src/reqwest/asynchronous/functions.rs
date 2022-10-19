@@ -5,7 +5,7 @@ use crate::{
     structs::{
         channel::{Channel, ChannelComments, ChannelPlaylists, ChannelSearch, ChannelVideos},
         universal::{Mix, Playlist, Popular, Search, Stats, Trending},
-        video::{Captions, Comments, Video},
+        video::{Annotations, Captions, Comments, Video},
     },
     traits::PublicItems,
 };
@@ -56,6 +56,19 @@ pub async fn captions(
         .await?;
     let captions = Captions::from_str(&body)?;
     Ok(captions)
+}
+
+pub async fn annotations(
+    server: &str,
+    video_id: &str,
+    args: Option<&str>,
+) -> Result<Annotations, Box<dyn Error>> {
+    let body = reqwest::get(Annotations::url(server, url_args(Some(video_id), args)))
+        .await?
+        .text()
+        .await?;
+    let annotations = Annotations::from_str(&body).unwrap();
+    Ok(annotations)
 }
 
 pub async fn trending(server: &str, args: Option<&str>) -> Result<Trending, Box<dyn Error>> {

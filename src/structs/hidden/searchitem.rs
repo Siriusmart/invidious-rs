@@ -31,10 +31,13 @@ pub struct SearchItemTransition {
 
     #[serde(rename(serialize = "playlistId", deserialize = "playlistId"))]
     pub playlist_id: Option<String>,
+    #[serde(rename(serialize = "playlistThumbnail", deserialize = "playlistThumbnail"))]
+    pub playlist_thumbnail: Option<String>,
     #[serde(rename(serialize = "videoCount", deserialize = "videoCount"))]
     pub video_count: Option<u32>,
     pub videos: Option<Vec<SearchPlaylistVideo>>,
-
+    #[serde(rename(serialize = "authorVerified", deserialize = "authorVerified"))]
+    pub verified: Option<bool>,
     #[serde(rename(serialize = "authorThumbnails", deserialize = "authorThumbnails"))]
     pub author_thumbnails: Option<Vec<AuthorThumbnail>>,
     #[serde(rename(serialize = "subCount", deserialize = "subCount"))]
@@ -64,9 +67,11 @@ impl SearchItemTransition {
             "playlist" => SearchItem::Playlist {
                 title: self.title.unwrap_or(String::new()),
                 id: self.playlist_id.unwrap_or(String::new()),
+                thumbnail: self.playlist_thumbnail.unwrap(),
                 author: self.author,
                 author_id: self.author_id,
                 author_url: self.author_url,
+                author_verified: self.verified.unwrap(),
                 video_count: self.video_count.unwrap_or(0),
                 videos: self.videos.unwrap_or(Vec::new()),
             },
@@ -74,12 +79,12 @@ impl SearchItemTransition {
                 name: self.author,
                 id: self.author_id,
                 url: self.author_url,
-
-                thumbnails: self.author_thumbnails.unwrap_or(Vec::new()),
-                subscribers: self.sub_count.unwrap_or(0),
-                video_count: self.video_count.unwrap_or(0),
-                description: self.description.unwrap_or(String::new()),
-                description_html: self.description_html.unwrap_or(String::new()),
+                verified: self.verified.unwrap(),
+                thumbnails: self.author_thumbnails.unwrap(),
+                subscribers: self.sub_count.unwrap(),
+                video_count: self.video_count.unwrap(),
+                description: self.description.unwrap(),
+                description_html: self.description_html.unwrap(),
             },
             _ => SearchItem::Unknown(self),
         }
@@ -112,15 +117,17 @@ pub enum SearchItem {
         author: String,
         author_id: String,
         author_url: String,
+        author_verified: bool,
         video_count: u32,
         videos: Vec<SearchPlaylistVideo>,
+        thumbnail: String,
     },
 
     Channel {
         name: String,
         id: String,
         url: String,
-
+        verified: bool,
         thumbnails: Vec<AuthorThumbnail>,
         subscribers: u32,
         video_count: u32,

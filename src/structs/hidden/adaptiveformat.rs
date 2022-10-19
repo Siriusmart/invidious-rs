@@ -25,7 +25,7 @@ pub struct AdaptiveFormat {
     pub encoding: String,
     #[serde(default)]
     #[serde(rename(serialize = "qualityLabel", deserialize = "qualityLabel"))]
-    pub quality_label: String,
+    pub quality: String,
     #[serde(default)]
     pub resolution: String,
 }

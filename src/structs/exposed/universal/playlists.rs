@@ -9,6 +9,8 @@ pub struct Playlist {
     pub title: String,
     #[serde(rename(serialize = "playlistId", deserialize = "playlistId"))]
     pub id: String,
+    #[serde(rename(serialize = "playlistThumbnail", deserialize = "playlistThumbnail"))]
+    pub thumbnail: String,
 
     pub author: String,
     #[serde(rename(serialize = "authorId", deserialize = "authorId"))]
@@ -24,6 +26,9 @@ pub struct Playlist {
     #[serde(rename(serialize = "viewCount", deserialize = "viewCount"))]
     pub views: u64,
     pub updated: u64,
+    #[serde(rename(serialize = "isListed", deserialize = "isListed"))]
+    pub listed: bool,
+    
 
     pub videos: Vec<PlaylistItem>,
 }

@@ -1,5 +1,5 @@
-use serde::{Deserialize, Serialize};
 use crate::structs::hidden::VideoThumbnail;
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct MixVideo {

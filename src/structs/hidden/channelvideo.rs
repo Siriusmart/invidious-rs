@@ -26,8 +26,9 @@ pub struct ChannelVideo {
     #[serde(rename(serialize = "authorUrl", deserialize = "authorUrl"))]
     pub author_url: String,
 
-    #[serde(default)]
-    pub paid: bool,
-    #[serde(default)]
+    #[serde(rename(serialize = "liveNow", deserialize = "liveNow"))]
+    pub live: bool,
     pub premium: bool,
+    #[serde(rename(serialize = "isUpcoming", deserialize = "isUpcoming"))]
+    pub upcoming: bool,
 }

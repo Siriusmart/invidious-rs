@@ -1,6 +1,7 @@
 use crate::{
     structs::hidden::{
-        AdaptiveFormat, AuthorThumbnail, Caption, FormatStream, VideoShort, VideoThumbnail, CountryCode,
+        AdaptiveFormat, AuthorThumbnail, Caption, CountryCode, FormatStream, Storyboard,
+        VideoShort, VideoThumbnail,
     },
     traits::PublicItems,
 };
@@ -13,10 +14,10 @@ pub struct Video {
     pub id: String,
     #[serde(rename(serialize = "videoThumbnails", deserialize = "videoThumbnails"))]
     pub thumbnails: Vec<VideoThumbnail>,
-
+    pub storyboards: Vec<Storyboard>,
     pub description: String,
     #[serde(rename(serialize = "descriptionHtml", deserialize = "descriptionHtml"))]
-    pub description_html: Option<String>,
+    pub description_html: String,
     pub published: u64,
     #[serde(rename(serialize = "publishedText", deserialize = "publishedText"))]
     pub published_text: String,
@@ -36,8 +37,8 @@ pub struct Video {
     #[serde(rename(serialize = "allowedRegions", deserialize = "allowedRegions"))]
     pub allowed_regions: Vec<CountryCode>,
     pub genre: String,
-    #[serde(rename(serialize = "genreserverUrl", deserialize = "genreserverUrl"))]
-    pub genre_server: Option<String>,
+    #[serde(rename(serialize = "genreUrl", deserialize = "genreUrl"))]
+    pub genre_url: String,
 
     pub author: String,
     #[serde(rename(serialize = "authorId", deserialize = "authorId"))]
@@ -60,11 +61,9 @@ pub struct Video {
     pub live: bool,
     #[serde(rename(serialize = "isUpcoming", deserialize = "isUpcoming"))]
     pub upcoming: bool,
-    #[serde(rename(serialize = "premiereTimestamp", deserialize = "premiereTimestamp"))]
-    pub premiere: Option<u64>,
+    #[serde(rename(serialize = "dashUrl", deserialize = "dashUrl"))]
+    pub dash: String,
 
-    #[serde(rename(serialize = "hlsserverUrl", deserialize = "hlsserverUrl"))]
-    pub hls_server: Option<String>,
     #[serde(rename(serialize = "adaptiveFormats", deserialize = "adaptiveFormats"))]
     pub adaptive_formats: Vec<AdaptiveFormat>,
     #[serde(rename(serialize = "formatStreams", deserialize = "formatStreams"))]
@@ -78,6 +77,6 @@ pub struct Video {
 
 impl PublicItems for Video {
     fn url(server: &str, args: String) -> String {
-        format!("{}/api/v1/videos/{}", server, args)
+        format!("{server}/api/v1/videos/{args}")
     }
 }

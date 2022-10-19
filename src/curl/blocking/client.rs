@@ -1,8 +1,6 @@
-use crate::{
-    structs::{channel::*, universal::*, video::*},
-};
-use std::error::Error;
 use super::functions::*;
+use crate::structs::{channel::*, universal::*, video::*};
+use std::error::Error;
 
 /// Main struct of the library with all the functions to interact with the Invidious API (Async).
 ///
@@ -129,11 +127,7 @@ impl Client {
     /// # Additional arguments
     /// * `sort_by`: `top`, `new` (default: `top`)
     /// * `source`: `youtube`, `reddit` (default: `youtube`)
-    pub fn comments(
-        &self,
-        video_id: &str,
-        args: Option<&str>,
-    ) -> Result<Comments, Box<dyn Error>> {
+    pub fn comments(&self, video_id: &str, args: Option<&str>) -> Result<Comments, Box<dyn Error>> {
         comments(&self.server, video_id, args)
     }
 
@@ -159,12 +153,33 @@ impl Client {
     /// * `lang`:  String
     /// * `tlang`: String
     /// * `region`: ISO 3166 country code (default: `US`)
-    pub fn captions(
+    pub fn captions(&self, video_id: &str, args: Option<&str>) -> Result<Captions, Box<dyn Error>> {
+        captions(&self.server, video_id, args)
+    }
+
+    /// Returns annotation XML from YouTube's `/annotations_invideo` endpoint
+    ///
+    /// # Examples
+    /// ```rust
+    /// # use invidious::curl::blocking::Client;
+    /// # use std::error::Error;
+    /// #
+    /// # fn main() -> Result<(), Box<dyn Error>> {
+    /// # let client = Client::new(String::from("https://vid.puffyan.us"));
+    /// let annotations = client.annotations("MSfD-QApDyU", None);
+    /// # Ok(())
+    /// # }
+    /// ```
+    ///
+    /// # Additional arguments
+    ///
+    /// * `source`: "archive", "youtube" (default: "archive")
+    pub fn annotations(
         &self,
         video_id: &str,
         args: Option<&str>,
-    ) -> Result<Captions, Box<dyn Error>> {
-        captions(&self.server, video_id, args)
+    ) -> Result<Annotations, Box<dyn Error>> {
+        annotations(&self.server, video_id, args)
     }
 
     /// Get videos on the trending page (Same as on YouTube).

@@ -1,6 +1,4 @@
-use crate::{
-    structs::{channel::*, universal::*, video::*},
-};
+use crate::structs::{channel::*, universal::*, video::*};
 use std::error::Error;
 
 use super::functions::*;
@@ -171,6 +169,32 @@ impl Client {
         args: Option<&str>,
     ) -> Result<Captions, Box<dyn Error>> {
         captions(&self.server, video_id, args).await
+    }
+
+    /// Returns annotation XML from YouTube's `/annotations_invideo` endpoint
+    ///
+    /// # Examples
+    /// ```rust
+    /// # use invidious::curl::asynchronous::Client;
+    /// # use std::error::Error;
+    /// #
+    /// # #[tokio::main]
+    /// # async fn main() -> Result<(), Box<dyn Error>> {
+    /// # let client = Client::new(String::from("https://vid.puffyan.us"));
+    /// let annotations = client.annotations("MSfD-QApDyU", None).await?;
+    /// # Ok(())
+    /// # }
+    /// ```
+    ///
+    /// # Additional arguments
+    ///
+    /// * `source`: "archive", "youtube" (default: "archive")
+    pub async fn annotations(
+        &self,
+        video_id: &str,
+        args: Option<&str>,
+    ) -> Result<Annotations, Box<dyn Error>> {
+        annotations(&self.server, video_id, args).await
     }
 
     /// Get videos on the trending page (Same as on YouTube).

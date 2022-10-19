@@ -3,6 +3,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Comment {
+    #[serde(default)]
+    pub verified: bool,
     #[serde(rename(serialize = "commentId", deserialize = "commentId"))]
     pub id: String,
     #[serde(rename(serialize = "likeCount", deserialize = "likeCount"))]
@@ -24,8 +26,10 @@ pub struct Comment {
     #[serde(rename(serialize = "authorUrl", deserialize = "authorUrl"))]
     pub author_url: String,
 
-
-    #[serde(rename(serialize = "authorIsChannelOwner", deserialize = "authorIsChannelOwner"))]
+    #[serde(rename(
+        serialize = "authorIsChannelOwner",
+        deserialize = "authorIsChannelOwner"
+    ))]
     pub channel_owner: bool,
     #[serde(default)]
     #[serde(rename(serialize = "createrHeart", deserialize = "createrHeart"))]

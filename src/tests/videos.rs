@@ -13,7 +13,7 @@ fn videos() {
 #[test]
 fn comments() {
     let client = Client::new(String::from("https://vid.puffyan.us"));
-    let videos = ["MSfD-QApDyU"];
+    let videos = ["MSfD-QApDyU", "erEgovG9WBs"];
 
     for video in videos.iter() {
         client.comments(video, None).unwrap();
@@ -27,5 +27,15 @@ fn captions() {
 
     for video in videos.iter() {
         client.captions(video, None).unwrap();
+    }
+}
+
+#[test]
+fn annotations() {
+    let client = Client::new(String::from("https://vid.puffyan.us"));
+    let videos = ["u2hVK24UPWQ"];
+
+    for video in videos.iter() {
+        client.annotations(video, None).unwrap();
     }
 }

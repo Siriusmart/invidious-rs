@@ -13,6 +13,6 @@ pub struct ChannelComments {
 
 impl PublicItems for ChannelComments {
     fn url(server: &str, args: String) -> String {
-        format!("{}/api/v1/channels/{}/community?", server, args)
+        format!("{server}/api/v1/channels/{args}/community?",)
     }
 }

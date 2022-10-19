@@ -1,5 +1,5 @@
 use crate::{structs::hidden::PopularItem, traits::PublicItems};
-use serde::{Deserialize, Serialize, de::DeserializeOwned};
+use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::Value;
 use std::error::Error;
 
@@ -10,12 +10,12 @@ pub struct Popular {
 
 impl PublicItems for Popular {
     fn url(server: &str, args: String) -> String {
-        format!("{}/api/v1/popular/{}", server, args)
+        format!("{server}/api/v1/popular/{args}")
     }
 
     fn from_value(value: Value) -> Result<Self, Box<dyn Error>>
     where
-        Self: Sized + DeserializeOwned, 
+        Self: Sized + DeserializeOwned,
     {
         Ok(Self {
             items: serde_json::from_value(value)?,
