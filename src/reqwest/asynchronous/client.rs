@@ -1,6 +1,5 @@
 use crate::structs::{channel::*, universal::*, video::*};
 use std::error::Error;
-
 use super::functions::*;
 
 /// Main struct of the library with all the functions to interact with the Invidious API (Async).
