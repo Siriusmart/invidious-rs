@@ -28,7 +28,6 @@ pub struct Playlist {
     pub updated: u64,
     #[serde(rename(serialize = "isListed", deserialize = "isListed"))]
     pub listed: bool,
-    
 
     pub videos: Vec<PlaylistItem>,
 }
