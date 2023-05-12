@@ -5,34 +5,31 @@ use serde::{Deserialize, Serialize};
 pub struct Comment {
     #[serde(default)]
     pub verified: bool,
-    #[serde(rename(serialize = "commentId", deserialize = "commentId"))]
+    #[serde(rename = "commentId")]
     pub id: String,
-    #[serde(rename(serialize = "likeCount", deserialize = "likeCount"))]
+    #[serde(rename = "likeCount")]
     pub likes: u32,
-    #[serde(rename(serialize = "isEdited", deserialize = "isEdited"))]
+    #[serde(rename = "isEdited")]
     pub edited: bool,
     pub content: String,
-    #[serde(rename(serialize = "contentHtml", deserialize = "contentHtml"))]
+    #[serde(rename = "contentHtml")]
     pub content_html: String,
     pub published: u64,
-    #[serde(rename(serialize = "publishedText", deserialize = "publishedText"))]
+    #[serde(rename = "publishedText")]
     pub published_text: String,
 
     pub author: String,
-    #[serde(rename(serialize = "authorThumbnails", deserialize = "authorThumbnails"))]
+    #[serde(rename = "authorThumbnails")]
     pub author_thumbnails: Vec<AuthorThumbnail>,
-    #[serde(rename(serialize = "authorId", deserialize = "authorId"))]
+    #[serde(rename = "authorId")]
     pub author_id: String,
-    #[serde(rename(serialize = "authorUrl", deserialize = "authorUrl"))]
+    #[serde(rename = "authorUrl")]
     pub author_url: String,
 
-    #[serde(rename(
-        serialize = "authorIsChannelOwner",
-        deserialize = "authorIsChannelOwner"
-    ))]
+    #[serde(rename = "authorIsChannelOwner")]
     pub channel_owner: bool,
     #[serde(default)]
-    #[serde(rename(serialize = "createrHeart", deserialize = "createrHeart"))]
+    #[serde(rename = "createrHeart")]
     pub heart: Option<CreatorHeart>,
     #[serde(default)]
     pub replies: Option<Replies>,
@@ -40,15 +37,15 @@ pub struct Comment {
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct CreatorHeart {
-    #[serde(rename(serialize = "creatorThumbnail", deserialize = "creatorThumbnail"))]
+    #[serde(rename = "creatorThumbnail")]
     pub thumbnail: String,
-    #[serde(rename(serialize = "creatorName", deserialize = "creatorName"))]
+    #[serde(rename = "creatorName")]
     pub name: String,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Replies {
-    #[serde(rename(serialize = "replyCount", deserialize = "replyCount"))]
+    #[serde(rename = "replyCount")]
     replies: u32,
     continuation: String,
 }

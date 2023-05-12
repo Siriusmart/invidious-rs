@@ -3,7 +3,7 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ChannelComments {
-    #[serde(rename(serialize = "authorId", deserialize = "authorId"))]
+    #[serde(rename = "authorId")]
     pub author_id: String,
     pub comments: Vec<Comment>,
     #[serde(default)]

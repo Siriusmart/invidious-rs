@@ -17,14 +17,14 @@ pub struct AdaptiveFormat {
     #[serde(default)]
     pub lmt: String,
     #[serde(default)]
-    #[serde(rename(serialize = "protectionType", deserialize = "protectionType"))]
+    #[serde(rename = "protectionType")]
     pub projection_type: String,
     #[serde(default)]
     pub container: String,
     #[serde(default)]
     pub encoding: String,
     #[serde(default)]
-    #[serde(rename(serialize = "qualityLabel", deserialize = "qualityLabel"))]
+    #[serde(rename = "qualityLabel")]
     pub quality: String,
     #[serde(default)]
     pub resolution: String,

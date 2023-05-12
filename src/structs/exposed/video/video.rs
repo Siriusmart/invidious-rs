@@ -10,68 +10,68 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Video {
     pub title: String,
-    #[serde(rename(serialize = "videoId", deserialize = "videoId"))]
+    #[serde(rename = "videoId")]
     pub id: String,
-    #[serde(rename(serialize = "videoThumbnails", deserialize = "videoThumbnails"))]
+    #[serde(rename = "videoThumbnails")]
     pub thumbnails: Vec<VideoThumbnail>,
     pub storyboards: Vec<Storyboard>,
     pub description: String,
-    #[serde(rename(serialize = "descriptionHtml", deserialize = "descriptionHtml"))]
+    #[serde(rename = "descriptionHtml")]
     pub description_html: String,
     pub published: u64,
-    #[serde(rename(serialize = "publishedText", deserialize = "publishedText"))]
+    #[serde(rename = "publishedText")]
     pub published_text: String,
 
     pub keywords: Vec<String>,
-    #[serde(rename(serialize = "viewCount", deserialize = "viewCount"))]
+    #[serde(rename = "viewCount")]
     pub views: u64,
-    #[serde(rename(serialize = "likeCount", deserialize = "likeCount"))]
+    #[serde(rename = "likeCount")]
     pub likes: u32,
-    #[serde(rename(serialize = "dislikeCount", deserialize = "dislikeCount"))]
+    #[serde(rename = "dislikeCount")]
     pub dislikes: u32,
 
     pub paid: bool,
     pub premium: bool,
-    #[serde(rename(serialize = "isFamilyFriendly", deserialize = "isFamilyFriendly"))]
+    #[serde(rename = "isFamilyFriendly")]
     pub family_friendly: bool,
-    #[serde(rename(serialize = "allowedRegions", deserialize = "allowedRegions"))]
+    #[serde(rename = "allowedRegions")]
     pub allowed_regions: Vec<CountryCode>,
     pub genre: String,
-    #[serde(rename(serialize = "genreUrl", deserialize = "genreUrl"))]
+    #[serde(rename = "genreUrl")]
     pub genre_url: String,
 
     pub author: String,
-    #[serde(rename(serialize = "authorId", deserialize = "authorId"))]
+    #[serde(rename = "authorId")]
     pub author_id: String,
-    #[serde(rename(serialize = "authorUrl", deserialize = "authorUrl"))]
+    #[serde(rename = "authorUrl")]
     pub author_url: String,
-    #[serde(rename(serialize = "authorThumbnails", deserialize = "authorThumbnails"))]
+    #[serde(rename = "authorThumbnails")]
     pub author_thumbnails: Vec<AuthorThumbnail>,
 
-    #[serde(rename(serialize = "subCountText", deserialize = "subCountText"))]
+    #[serde(rename = "subCountText")]
     pub sub_count_text: String,
-    #[serde(rename(serialize = "lengthSeconds", deserialize = "lengthSeconds"))]
+    #[serde(rename = "lengthSeconds")]
     pub length: u32,
-    #[serde(rename(serialize = "allowRatings", deserialize = "allowRatings"))]
+    #[serde(rename = "allowRatings")]
     pub allow_ratings: bool,
     pub rating: f32,
-    #[serde(rename(serialize = "isListed", deserialize = "isListed"))]
+    #[serde(rename = "isListed")]
     pub listed: bool,
-    #[serde(rename(serialize = "liveNow", deserialize = "liveNow"))]
+    #[serde(rename = "liveNow")]
     pub live: bool,
-    #[serde(rename(serialize = "isUpcoming", deserialize = "isUpcoming"))]
+    #[serde(rename = "isUpcoming")]
     pub upcoming: bool,
-    #[serde(rename(serialize = "dashUrl", deserialize = "dashUrl"))]
+    #[serde(rename = "dashUrl")]
     pub dash: String,
 
-    #[serde(rename(serialize = "adaptiveFormats", deserialize = "adaptiveFormats"))]
+    #[serde(rename = "adaptiveFormats")]
     pub adaptive_formats: Vec<AdaptiveFormat>,
-    #[serde(rename(serialize = "formatStreams", deserialize = "formatStreams"))]
+    #[serde(rename = "formatStreams")]
     pub format_streams: Vec<FormatStream>,
 
     pub captions: Vec<Caption>,
 
-    #[serde(rename(serialize = "recommendedVideos", deserialize = "recommendedVideos"))]
+    #[serde(rename = "recommendedVideos")]
     pub recommended_videos: Vec<VideoShort>,
 }
 

@@ -4,17 +4,17 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct PlaylistItem {
     pub title: String,
-    #[serde(rename(serialize = "videoId", deserialize = "videoId"))]
+    #[serde(rename = "videoId")]
     pub id: String,
     pub author: String,
-    #[serde(rename(serialize = "authorId", deserialize = "authorId"))]
+    #[serde(rename = "authorId")]
     pub author_id: String,
-    #[serde(rename(serialize = "authorUrl", deserialize = "authorUrl"))]
+    #[serde(rename = "authorUrl")]
     pub author_url: String,
 
-    #[serde(rename(serialize = "videoThumbnails", deserialize = "videoThumbnails"))]
+    #[serde(rename = "videoThumbnails")]
     pub thumbnails: Vec<VideoThumbnail>,
     pub index: u32,
-    #[serde(rename(serialize = "lengthSeconds", deserialize = "lengthSeconds"))]
+    #[serde(rename = "lengthSeconds")]
     pub length: u32,
 }

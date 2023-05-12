@@ -18,8 +18,6 @@ impl PublicItems for ChannelVideos {
     where
         Self: Sized + DeserializeOwned,
     {
-        Ok(Self {
-            videos: serde_json::from_value(value)?,
-        })
+        Ok(serde_json::from_value(value)?)
     }
 }

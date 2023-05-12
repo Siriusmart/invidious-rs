@@ -8,7 +8,7 @@ use serde::{Deserialize, Serialize};
 pub struct Stats {
     pub version: String,
     pub software: Software,
-    #[serde(rename(serialize = "openRegistrations", deserialize = "openRegistrations"))]
+    #[serde(rename = "openRegistrations")]
     pub registrations: bool,
     pub usage: Usage,
     pub metadata: Metadata,

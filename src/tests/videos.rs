@@ -2,7 +2,7 @@ use crate::reqwest::blocking::Client;
 
 #[test]
 fn videos() {
-    let client = Client::new(String::from("https://vid.puffyan.us"));
+    let client = Client::new(super::INSTANCE.to_string());
     let videos = ["d09-P9R5BRE"];
 
     for video in videos.iter() {
@@ -12,7 +12,7 @@ fn videos() {
 
 #[test]
 fn comments() {
-    let client = Client::new(String::from("https://vid.puffyan.us"));
+    let client = Client::new(super::INSTANCE.to_string());
     let videos = ["MSfD-QApDyU", "erEgovG9WBs"];
 
     for video in videos.iter() {
@@ -22,7 +22,7 @@ fn comments() {
 
 #[test]
 fn captions() {
-    let client = Client::new(String::from("https://vid.puffyan.us"));
+    let client = Client::new(super::INSTANCE.to_string());
     let videos = ["u2hVK24UPWQ"];
 
     for video in videos.iter() {
@@ -32,7 +32,7 @@ fn captions() {
 
 #[test]
 fn annotations() {
-    let client = Client::new(String::from("https://vid.puffyan.us"));
+    let client = Client::new(super::INSTANCE.to_string());
     let videos = ["u2hVK24UPWQ"];
 
     for video in videos.iter() {

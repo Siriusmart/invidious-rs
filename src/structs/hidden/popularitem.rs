@@ -5,23 +5,23 @@ use serde::{Deserialize, Serialize};
 pub struct PopularItem {
     pub r#type: String,
     pub title: String,
-    #[serde(rename(serialize = "videoId", deserialize = "videoId"))]
+    #[serde(rename = "videoId")]
     pub id: String,
-    #[serde(rename(serialize = "videoThumbnails", deserialize = "videoThumbnails"))]
+    #[serde(rename = "videoThumbnails")]
     pub thumbnails: Vec<VideoThumbnail>,
 
-    #[serde(rename(serialize = "lengthSeconds", deserialize = "lengthSeconds"))]
+    #[serde(rename = "lengthSeconds")]
     pub length: u32,
-    #[serde(rename(serialize = "viewCount", deserialize = "viewCount"))]
+    #[serde(rename = "viewCount")]
     pub views: u64,
 
     pub author: String,
-    #[serde(rename(serialize = "authorId", deserialize = "authorId"))]
+    #[serde(rename = "authorId")]
     pub author_id: String,
-    #[serde(rename(serialize = "authorUrl", deserialize = "authorUrl"))]
+    #[serde(rename = "authorUrl")]
     pub author_url: String,
 
     pub published: u64,
-    #[serde(rename(serialize = "publishedText", deserialize = "publishedText"))]
+    #[serde(rename = "publishedText")]
     pub published_text: String,
 }

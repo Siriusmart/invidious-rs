@@ -3,9 +3,9 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Comments {
-    #[serde(rename(serialize = "commentCount", deserialize = "commentCount"))]
+    #[serde(rename = "commentCount")]
     pub comment_count: u32,
-    #[serde(rename(serialize = "videoId", deserialize = "videoId"))]
+    #[serde(rename = "videoId")]
     pub id: String,
     pub comments: Vec<Comment>,
     pub continuation: Option<String>,

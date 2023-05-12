@@ -15,19 +15,16 @@ pub struct Usage {
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Users {
     pub total: u32,
-    #[serde(rename(serialize = "activeHalfyear", deserialize = "activeHalfyear"))]
+    #[serde(rename = "activeHalfyear")]
     pub half_year: u32,
-    #[serde(rename(serialize = "activeMonth", deserialize = "activeMonth"))]
+    #[serde(rename = "activeMonth")]
     pub month: u32,
 }
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Metadata {
-    #[serde(rename(serialize = "updatedAt", deserialize = "updatedAt"))]
+    #[serde(rename = "updatedAt")]
     pub updated: u64,
-    #[serde(rename(
-        serialize = "lastChannelRefreshedAt",
-        deserialize = "lastChannelRefreshedAt"
-    ))]
+    #[serde(rename = "lastChannelRefreshedAt")]
     pub last_channel_refresh: u64,
 }

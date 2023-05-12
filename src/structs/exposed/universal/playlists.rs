@@ -7,26 +7,26 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Playlist {
     pub title: String,
-    #[serde(rename(serialize = "playlistId", deserialize = "playlistId"))]
+    #[serde(rename = "playlistId")]
     pub id: String,
-    #[serde(rename(serialize = "playlistThumbnail", deserialize = "playlistThumbnail"))]
+    #[serde(rename = "playlistThumbnail")]
     pub thumbnail: String,
 
     pub author: String,
-    #[serde(rename(serialize = "authorId", deserialize = "authorId"))]
+    #[serde(rename = "authorId")]
     pub author_id: String,
-    #[serde(rename(serialize = "authorThumbnails", deserialize = "authorThumbnails"))]
+    #[serde(rename = "authorThumbnails")]
     pub author_thumbnails: Vec<AuthorThumbnail>,
     pub description: String,
-    #[serde(rename(serialize = "descriptionHtml", deserialize = "descriptionHtml"))]
+    #[serde(rename = "descriptionHtml")]
     pub description_html: String,
 
-    #[serde(rename(serialize = "videoCount", deserialize = "videoCount"))]
+    #[serde(rename = "videoCount")]
     pub video_count: u32,
-    #[serde(rename(serialize = "viewCount", deserialize = "viewCount"))]
+    #[serde(rename = "viewCount")]
     pub views: u64,
     pub updated: u64,
-    #[serde(rename(serialize = "isListed", deserialize = "isListed"))]
+    #[serde(rename = "isListed")]
     pub listed: bool,
 
     pub videos: Vec<PlaylistItem>,

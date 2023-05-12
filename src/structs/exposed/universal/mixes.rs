@@ -4,7 +4,7 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Mix {
     pub title: String,
-    #[serde(rename(serialize = "midId", deserialize = "midId"))]
+    #[serde(rename = "midId")]
     pub id: String,
     pub videos: Vec<MixVideo>,
 }

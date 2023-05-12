@@ -8,7 +8,7 @@ pub struct FormatStream {
     pub quality: String,
     pub container: String,
     pub encoding: String,
-    #[serde(rename(serialize = "qualityLabel", deserialize = "qualityLabel"))]
+    #[serde(rename = "qualityLabel")]
     pub quality_label: String,
     pub resolution: String,
     pub size: String,

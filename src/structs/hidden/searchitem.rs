@@ -5,42 +5,42 @@ use serde::{Deserialize, Serialize};
 pub struct SearchItemTransition {
     pub r#type: String,
     pub title: Option<String>,
-    #[serde(rename(serialize = "videoId", deserialize = "videoId"))]
+    #[serde(rename = "videoId")]
     pub video_id: Option<String>,
     pub author: String,
-    #[serde(rename(serialize = "authorId", deserialize = "authorId"))]
+    #[serde(rename = "authorId")]
     pub author_id: String,
-    #[serde(rename(serialize = "authorUrl", deserialize = "authorUrl"))]
+    #[serde(rename = "authorUrl")]
     pub author_url: String,
-    #[serde(rename(serialize = "videoThumbnails", deserialize = "videoThumbnails"))]
+    #[serde(rename = "videoThumbnails")]
     pub video_thumbnails: Option<Vec<VideoThumbnail>>,
     pub description: Option<String>,
-    #[serde(rename(serialize = "descriptionHtml", deserialize = "descriptionHtml"))]
+    #[serde(rename = "descriptionHtml")]
     pub description_html: Option<String>,
-    #[serde(rename(serialize = "viewCount", deserialize = "viewCount"))]
+    #[serde(rename = "viewCount")]
     pub view_count: Option<u64>,
     pub published: Option<u64>,
-    #[serde(rename(serialize = "publishedText", deserialize = "publishedText"))]
+    #[serde(rename = "publishedText")]
     pub published_text: Option<String>,
-    #[serde(rename(serialize = "lengthSeconds", deserialize = "lengthSeconds"))]
+    #[serde(rename = "lengthSeconds")]
     pub length_seconds: Option<u64>,
-    #[serde(rename(serialize = "liveNow", deserialize = "liveNow"))]
+    #[serde(rename = "liveNow")]
     pub live_now: Option<bool>,
     pub paid: Option<bool>,
     pub premium: Option<bool>,
 
-    #[serde(rename(serialize = "playlistId", deserialize = "playlistId"))]
+    #[serde(rename = "playlistId")]
     pub playlist_id: Option<String>,
-    #[serde(rename(serialize = "playlistThumbnail", deserialize = "playlistThumbnail"))]
+    #[serde(rename = "playlistThumbnail")]
     pub playlist_thumbnail: Option<String>,
-    #[serde(rename(serialize = "videoCount", deserialize = "videoCount"))]
+    #[serde(rename = "videoCount")]
     pub video_count: Option<u32>,
     pub videos: Option<Vec<SearchPlaylistVideo>>,
-    #[serde(rename(serialize = "authorVerified", deserialize = "authorVerified"))]
+    #[serde(rename = "authorVerified")]
     pub verified: Option<bool>,
-    #[serde(rename(serialize = "authorThumbnails", deserialize = "authorThumbnails"))]
+    #[serde(rename = "authorThumbnails")]
     pub author_thumbnails: Option<Vec<AuthorThumbnail>>,
-    #[serde(rename(serialize = "subCount", deserialize = "subCount"))]
+    #[serde(rename = "subCount")]
     pub sub_count: Option<u32>,
 }
 

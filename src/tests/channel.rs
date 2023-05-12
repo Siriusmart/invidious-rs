@@ -2,7 +2,7 @@ use crate::reqwest::blocking::Client;
 
 #[test]
 pub fn channel() {
-    let client = Client::new(String::from("https://vid.puffyan.us"));
+    let client = Client::new(super::INSTANCE.to_string());
     let channels = ["UC-lHJZR3Gqxm24_Vd_AJ5Yw"];
 
     for channel in channels.iter() {
@@ -12,7 +12,7 @@ pub fn channel() {
 }
 #[test]
 pub fn videos() {
-    let client = Client::new(String::from("https://vid.puffyan.us"));
+    let client = Client::new(super::INSTANCE.to_string());
     let channels = ["UC-lHJZR3Gqxm24_Vd_AJ5Yw"];
 
     for channel in channels.iter() {
@@ -24,7 +24,7 @@ pub fn videos() {
 
 #[test]
 pub fn playlists() {
-    let client = Client::new(String::from("https://vid.puffyan.us"));
+    let client = Client::new(super::INSTANCE.to_string());
     let channels = ["UC-lHJZR3Gqxm24_Vd_AJ5Yw"];
 
     for channel in channels.iter() {
@@ -34,7 +34,7 @@ pub fn playlists() {
 
 #[test]
 pub fn comments() {
-    let client = Client::new(String::from("https://vid.puffyan.us"));
+    let client = Client::new(super::INSTANCE.to_string());
     let channels = ["UC-lHJZR3Gqxm24_Vd_AJ5Yw"];
 
     for channel in channels.iter() {
@@ -44,7 +44,7 @@ pub fn comments() {
 
 #[test]
 pub fn search() {
-    let client = Client::new(String::from("https://vid.puffyan.us"));
+    let client = Client::new(super::INSTANCE.to_string());
     let channels = ["UC-lHJZR3Gqxm24_Vd_AJ5Yw"];
 
     for channel in channels.iter() {

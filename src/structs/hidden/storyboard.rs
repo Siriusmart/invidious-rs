@@ -3,17 +3,17 @@ use serde::{Deserialize, Serialize};
 #[derive(Debug, Clone, Serialize, Deserialize)]
 pub struct Storyboard {
     pub url: String,
-    #[serde(rename(serialize = "templateUrl", deserialize = "templateUrl"))]
+    #[serde(rename = "templateUrl")]
     pub template_url: String,
     pub width: u32,
     pub height: u32,
     pub count: i32,
     pub interval: u32,
-    #[serde(rename(serialize = "storyboardWidth", deserialize = "storyboardWidth"))]
+    #[serde(rename = "storyboardWidth")]
     pub storyboard_width: u16,
-    #[serde(rename(serialize = "storyboardHeight", deserialize = "storyboardHeight"))]
+    #[serde(rename = "storyboardHeight")]
     pub storyboard_height: u16,
-    #[serde(rename(serialize = "storyboardCount", deserialize = "storyboardCount"))]
+    #[serde(rename = "storyboardCount")]
     #[serde(default)]
     pub storyboard_count: i16,
 }

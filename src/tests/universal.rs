@@ -2,7 +2,7 @@ use crate::reqwest::blocking::Client;
 
 #[test]
 fn trending() {
-    let client = Client::new(String::from("https://vid.puffyan.us"));
+    let client = Client::new(super::INSTANCE.to_string());
     let trending = client.trending(None).unwrap();
 
     for item in trending.videos[0..1].iter() {
@@ -28,7 +28,7 @@ fn trending() {
 
 #[test]
 fn popular() {
-    let client = Client::new(String::from("https://vid.puffyan.us"));
+    let client = Client::new(super::INSTANCE.to_string());
     let popular = client.popular(None).unwrap();
 
     for item in popular.items[3..4].iter() {
@@ -54,12 +54,12 @@ fn popular() {
 
 #[test]
 fn stats() {
-    let client = Client::new(String::from("https://vid.puffyan.us"));
+    let client = Client::new(super::INSTANCE.to_string());
     client.stats(None).unwrap();
 }
 #[test]
 fn playlists() {
-    let client = Client::new(String::from("https://vid.puffyan.us"));
+    let client = Client::new(super::INSTANCE.to_string());
     let playlists_to_check = [
         "PLdgHTasZAjYaI2DUfqe70I82o9clPGyiO",
         "PLdgHTasZAjYZlCXN9rTcX9LFOQ-RIrzCs",
@@ -72,7 +72,7 @@ fn playlists() {
 
 #[test]
 fn search() {
-    let client = Client::new(String::from("https://vid.puffyan.us"));
+    let client = Client::new(super::INSTANCE.to_string());
     let search_terms = ["rust"];
 
     let types = ["video", "playlist", "channel", "all"];

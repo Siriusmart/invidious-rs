@@ -4,31 +4,31 @@ use serde::{Deserialize, Serialize};
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ChannelVideo {
     pub title: String,
-    #[serde(rename(serialize = "videoId", deserialize = "videoId"))]
+    #[serde(rename = "videoId")]
     pub id: String,
-    #[serde(rename(serialize = "videoThumbnails", deserialize = "videoThumbnails"))]
+    #[serde(rename = "videoThumbnails")]
     pub thumbnails: Vec<VideoThumbnail>,
     pub description: String,
-    #[serde(rename(serialize = "descriptionHtml", deserialize = "descriptionHtml"))]
+    #[serde(rename = "descriptionHtml")]
     pub description_html: String,
 
-    #[serde(rename(serialize = "viewCount", deserialize = "viewCount"))]
+    #[serde(rename = "viewCount")]
     pub view_count: u64,
     pub published: u64,
-    #[serde(rename(serialize = "publishedText", deserialize = "publishedText"))]
+    #[serde(rename = "publishedText")]
     pub published_text: String,
-    #[serde(rename(serialize = "lengthSeconds", deserialize = "lengthSeconds"))]
+    #[serde(rename = "lengthSeconds")]
     pub length: u32,
 
     pub author: String,
-    #[serde(rename(serialize = "authorId", deserialize = "authorId"))]
+    #[serde(rename = "authorId")]
     pub author_id: String,
-    #[serde(rename(serialize = "authorUrl", deserialize = "authorUrl"))]
+    #[serde(rename = "authorUrl")]
     pub author_url: String,
 
-    #[serde(rename(serialize = "liveNow", deserialize = "liveNow"))]
+    #[serde(rename = "liveNow")]
     pub live: bool,
     pub premium: bool,
-    #[serde(rename(serialize = "isUpcoming", deserialize = "isUpcoming"))]
+    #[serde(rename = "isUpcoming")]
     pub upcoming: bool,
 }
