@@ -1,66 +1,81 @@
 # invidious
 
-## invidious
-Rust bindings for the invidious API.
-Get information about videos, channels, and playlists from YouTube without using the YouTube official API.
+Rust bindings for the [Invidious API](https://docs.invidious.io/api).
 
-## Examples
+### Quickstart
 
-### Blocking API
+Get started by creating a client with `ClientSync::default()` and use the functions from there.
+
+#### Blocking API
+
 ```rust
-use invidious::reqwest::blocking::Client;
-use std::error::Error;
+use invidious::*;
 
-fn main() -> Result<(), Box<dyn Error>> {
-   let client = Client::new(String::from("https://vid.puffyan.us"));
-   let search_results = client.search(Some("q=rust programming"))?.items;
-   let video = client.video("5C_HPTJg5ek", None)?;
-
-  Ok(())
+fn main() {
+    let client = ClientSync::default();
+    let video = client.video("fBj3nEdCjkY", None).unwrap();
+    let seach_results = client.search(Some("q=testing")).unwrap();
 }
 ```
 
-### Async API
-```rust
-use invidious::reqwest::asynchronous::Client;
-use std::error::Error;
+#### Async API
 
+```rust
+#
 #[tokio::main]
 async fn main() {
-  let client = Client::new(String::from("https://vid.puffyan.us"));
-  let channel_videos = client.channel_videos("UCAkuTH35kk3W1EL9vq6dj6A", Some("sort_by=popular&page=2"))
-    .await
-    .unwrap();
-
-  let playlist = client.playlist("PLFgquLnL59alCl_2TQvOiD5Vgm1hCaGSI", None)
-    .await
-    .unwrap(); // Returns Playlist
+    let client = ClientAsync::default();
+    let vidio = client.video("fBj3nEdCjkY", None).await.unwrap();
+    let seach_results = client.search(Some("q=testing")).await.unwrap();
 }
 ```
 
-## General Usage
+Read more about [`ClientSync`](./struct.ClientSync.html) and [`ClientAsync`](./struct.ClientAsync.html) to see all avaliable functions.
 
-`client.function_name(id: &str, args: Option<&str>) -> Result<T, Box<dyn Error>>`
+### Features
 
-* `id` is the id of the video, channel, or playlist, and is only used when applicable.
-* `args` is an optional string of additional arguments to be passed to the API. For example, `sort_by=popular&page=2` (Arguments are separated by `&`)
+This crate utilises features for specifying which crates to use for fetching the http(s) responses. Only crates that are needed are included. Different features result in various compile times and performances. The compile times of each feature can be found in [`MethodSync`](./enum.MethodSync.html) and [`MethodAsync`](./enum.MethodAsync.html).
 
-## How this works
-Uses the Invidious api to get information about videos, channels, and playlists. The Invidious API is a REST API, so the invidious crate uses the reqwest crate to make requests to the Invidious API, and then uses the serde_json crate to parse the JSON returned by the Invidious API.
+All avaliable features are listed below.
 
-Official documentation of the Invidious API can be found here: <https://docs.invidious.io/api>
+|Feature|Crate used|
+|---|---|
+|`httpreq_sync` (enabled by default)|[http_req](https://crates.io/crates/http_req)|
+|`ureq_sync`|[ureq](https://crates.io/crates/ureq)|
+|`minreq_sync`|[minreq](https://crates.io/crates/minreq) with https feature|
+|`minreq_http_sync`|[minreq](https://crates.io/crates/minreq)|
+|`reqwest_sync`|[reqwest](https://crates.io/crates/reqwest) with blocking feature|
+|`reqwest_async`|[reqwest](https://crates.io/crates/reqwest)|
+|`isahc_sync`|[isahc](https://crates.io/crates/isahc)|
+|`isahc_async`|[isahc](https://crates.io/crates/isahc)|
 
-## Features
+### General usage
 
-* `reqwest`: use the reqwest crate to send requests, may increase complie time and size
-* `curl`: use the `curl` command to send reqwests, but `curl` may not be present in some systems
-* `curl_async`: async support for `curl`, uses external crate which increases compile time and
-size
+Most functions look something like:
 
-All features are enabled by default
+```rs
+client.function_name(id: &str, params: Option<&str>) // when id is needed.
+client.function_name(params: Option<&str>) // when id is not needed, for example search.
+```
 
-## License
+#### Params
 
-GNU General Public License v3.0
+Params allows user to include URL params as specified in the [Invidious API docs](https://docs.invidious.io/api).
+
+The beginning question mark `?` is omitted.
+
+### How this works
+
+[Invidious](https://invidious.io) is an alternative frontend for YouTube, and also offering an API.
+
+This crate includes structs for each of the API endpoints, and allowing users to include any extra parameters they want. Then uses the [serde](https://crates.io/crates/serde) crate to serialize and deserialize json responses from the [Invidious API](https://docs.invidious.io/api).
+
+### Contributing
+
+Contributions are welcome! Make a pull request at [GitHub](https://github.com/siriusmart/invidious-rs) if you do.
+
+- Make changes to outdated bindings structs.
+- Add new fetch methods with either faster compile time or runtime.
+- Improve documentation.
 
 License: GPL-3.0
