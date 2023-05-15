@@ -7,7 +7,7 @@ impl PublicItems for Annotations {
         format!("{server}/api/v1/annotations/{args}")
     }
 
-    fn from_str<'a>(s: &'a str) -> Result<Self, Box<dyn std::error::Error>>
+    fn from_str<'a>(s: &str) -> Result<Self, Box<dyn std::error::Error>>
     where
         Self: Sized + serde::de::DeserializeOwned,
     {

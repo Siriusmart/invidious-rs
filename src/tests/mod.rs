@@ -1,13 +1,10 @@
-#[cfg(test)]
-pub mod universal;
+// run tests `--all-features` and `-- --test-threads=a really high number`
 
 #[cfg(test)]
-pub mod videos;
-
+mod channel;
 #[cfg(test)]
-pub mod channel;
-
+mod methods;
 #[cfg(test)]
-pub mod curl;
-
-const INSTANCE: &'static str = "https://vid.puffyan.us";
+mod universal;
+#[cfg(test)]
+mod videos;

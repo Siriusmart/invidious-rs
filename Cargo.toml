@@ -1,6 +1,6 @@
 [package]
 name = "invidious"
-version = "0.4.1"
+version = "0.5.0"
 edition = "2021"
 authors = ["Siriusmart<siriusmart@tuta.io>"]
 description = "Get information about videos from YouTube with this simple Invidious API wrapper. Does not use the YouTube API (No tokens required)"
@@ -13,16 +13,31 @@ repository = "https://github.com/Siriusmart/invidious-rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [features]
-default = ["reqwest", "curl", "curl_async"]
-reqwest = ["dep:reqwest"]
-curl = []
-curl_async = ["dep:async-process"]
+default = ["httpreq_sync"]
+reqwest_sync = ["reqwest/blocking", "sync"]
+reqwest_async = ["reqwest", "async"]
+ureq_sync = ["dep:ureq", "sync"]
+httpreq_sync = ["dep:http_req", "sync"]
+minreq_http_sync = ["dep:minreq", "sync"]
+minreq_sync = ["minreq/https", "sync"]
+minreq = ["dep:minreq"]
+isahc_sync = ["dep:isahc", "sync"]
+isahc_async = ["dep:isahc", "async"]
+async = ["async-trait"]
+sync = []
 
 [dependencies]
-reqwest = {version = "0.11", features = ["blocking"], optional = true}
-async-process = {version = "1.4", optional = true, default-features = false}
+reqwest = {version = "0.11", optional = true}
+ureq = {version = "2.6", optional = true}
+async-trait = {version = "0.1", optional = true}
 serde = {version = "1.0", features = ["derive"]}
 serde_json = "1.0"
+http_req = {version = "0.9", optional = true}
+isahc = {version = "1.7", optional = true}
+minreq = {version = "2.7", optional = true}
 
 [dev-dependencies]
 tokio = {version = "1", features = ["macros"]} # For running doc test
+
+[package.metadata.docs.rs]
+all-features = true

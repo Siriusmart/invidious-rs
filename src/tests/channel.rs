@@ -1,53 +1,27 @@
-use crate::reqwest::blocking::Client;
-
 #[test]
-pub fn channel() {
-    let client = Client::new(super::INSTANCE.to_string());
-    let channels = ["UC-lHJZR3Gqxm24_Vd_AJ5Yw"];
-
-    for channel in channels.iter() {
-        client.channel(channel, None).unwrap();
-        // functions::channel(&client.server, channel, None).unwrap();
-    }
-}
-#[test]
-pub fn videos() {
-    let client = Client::new(super::INSTANCE.to_string());
-    let channels = ["UC-lHJZR3Gqxm24_Vd_AJ5Yw"];
-
-    for channel in channels.iter() {
-        client
-            .channel_videos(channel, Some("sort_by=popular"))
-            .unwrap();
-    }
+fn channel() {
+    crate::ClientSync::default()
+        .channel("UC7YOGHUfC1Tb6E4pudI9STA", None)
+        .unwrap();
 }
 
 #[test]
-pub fn playlists() {
-    let client = Client::new(super::INSTANCE.to_string());
-    let channels = ["UC-lHJZR3Gqxm24_Vd_AJ5Yw"];
-
-    for channel in channels.iter() {
-        client.channel_playlists(channel, None).unwrap();
-    }
+fn videos() {
+    crate::ClientSync::default()
+        .channel_videos("UC7YOGHUfC1Tb6E4pudI9STA", None)
+        .unwrap();
 }
 
 #[test]
-pub fn comments() {
-    let client = Client::new(super::INSTANCE.to_string());
-    let channels = ["UC-lHJZR3Gqxm24_Vd_AJ5Yw"];
-
-    for channel in channels.iter() {
-        client.channel_comments(channel, None).unwrap();
-    }
+fn playlists() {
+    crate::ClientSync::default()
+        .channel_playlists("UC7YOGHUfC1Tb6E4pudI9STA", None)
+        .unwrap();
 }
 
 #[test]
-pub fn search() {
-    let client = Client::new(super::INSTANCE.to_string());
-    let channels = ["UC-lHJZR3Gqxm24_Vd_AJ5Yw"];
-
-    for channel in channels.iter() {
-        client.channel_search(channel, Some("q=hello")).unwrap();
-    }
+fn search() {
+    crate::ClientSync::default()
+        .channel_search("UC7YOGHUfC1Tb6E4pudI9STA", Some("q=testing"))
+        .unwrap();
 }

@@ -1,5 +1,8 @@
 use std::{error::Error, fmt::Display};
 
+/// Error enum for the library.
+/// 
+/// With a very depressing one variant...
 #[derive(Debug)]
 pub enum InvidiousError {
     InvalidRequest(String),
