@@ -7,7 +7,7 @@ pub struct TrendingVideo {
     #[serde(rename = "videoId")]
     pub id: String,
     #[serde(rename = "videoThumbnails")]
-    pub thumbmails: Vec<VideoThumbnail>,
+    pub thumbnails: Vec<VideoThumbnail>,
 
     #[serde(rename = "lengthSeconds")]
     pub length: u32,
