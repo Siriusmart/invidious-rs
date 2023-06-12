@@ -20,6 +20,8 @@ pub struct AdaptiveFormat {
     #[serde(rename = "protectionType")]
     pub projection_type: String,
     #[serde(default)]
+    pub fps: u8,
+    #[serde(default)]
     pub container: String,
     #[serde(default)]
     pub encoding: String,
@@ -28,4 +30,16 @@ pub struct AdaptiveFormat {
     pub quality: String,
     #[serde(default)]
     pub resolution: String,
+    #[serde(default)]
+    #[serde(rename = "qualityLabel")]
+    pub quality_label: String,
+    #[serde(default)]
+    #[serde(rename = "audioQuality")]
+    pub audio_quality: String,
+    #[serde(default)]
+    #[serde(rename = "audioSampleRate")]
+    pub audio_sample_rate: usize,
+    #[serde(default)]
+    #[serde(rename = "audioChannels")]
+    pub audio_channels: usize,
 }
