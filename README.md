@@ -2,6 +2,13 @@
 
 Rust bindings for the [Invidious API](https://docs.invidious.io/api).
 
+> "May Invidious live and prosper, with, or without us."
+>
+> ~ The Invidious team on [YouTube trying to take them down](https://github.com/iv-org/invidious/issues/3872).
+
+Go show them some love by [donating](https://invidious.io/donate/) and starring their
+[GitHub repos](https://github.com/iv-org)!
+
 ### Quickstart
 
 Get started by creating a client with `ClientSync::default()` and use the functions from there.
@@ -20,8 +27,13 @@ fn main() {
 
 #### Async API
 
+Enable feature `reqwest_async`.
+
+```toml
+invidious = { version = "0.6", no-default-features = true, features = ["reqwest_async"]}
+```
+
 ```rust
-#
 #[tokio::main]
 async fn main() {
     let client = ClientAsync::default();
@@ -31,6 +43,51 @@ async fn main() {
 ```
 
 Read more about [`ClientSync`](./struct.ClientSync.html) and [`ClientAsync`](./struct.ClientAsync.html) to see all avaliable functions.
+
+### Methods
+
+Control how the client is making the web requests.
+
+#### Changing methods
+
+For example, to use `isahc` instead of `reqwest` for sending requests in `ClientAsync`, first
+enable the `isahc_async` feature and optionally disable the `reqwest_async` feature (if
+enabled).
+
+```toml
+invidious = { version = "6.0", no-default-features = true, features = ["isahc_async"]}
+```
+
+```rust
+let video = ClientAsync::default()
+    .method(MethodAsync::ISAHC)
+    .video("fBj3nEdCjkY", None).await.unwrap();
+```
+
+#### Custom methods
+
+If the existing methods are not suitable for use (takes too long to compile, resource
+inefficient, does not support async runtime), you can use your own fetch function instead.
+
+```toml
+invidious = { version = "6.0", no-default-features = true, features = ["async"]}
+```
+
+See no fetch features are enabled, just `async` which enables `ClientAsync` and related code.
+
+```rust
+#[tokio::main]
+async fn main() {
+    let video = ClientAsync::default()
+        .custom_method(Box::new(custom_fetch))
+        .video("fBj3nEdCjkY", None).await.unwrap();
+}
+
+// MethodReturn is just short for `Result<String, Box<dyn Error>>`
+async fn custom_fetch(url: String) -> MethodReturn {
+    Ok(reqwest::get(url).await?.text().await?)
+}
+```
 
 ### Features
 

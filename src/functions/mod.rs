@@ -5,3 +5,7 @@ pub use url_params::*;
 mod httpreq_get;
 #[cfg(feature = "httpreq_sync")]
 pub use httpreq_get::*;
+#[cfg(feature = "async")]
+mod into_method;
+#[cfg(feature = "async")]
+pub use into_method::*;

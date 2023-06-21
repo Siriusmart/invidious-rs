@@ -49,7 +49,7 @@ pub trait PublicItems {
         Self: Sized + DeserializeOwned,
     {
         let url = Self::url(&client.instance, url_params(id, params));
-        let res = client.method.fetch(&url).await?;
+        let res = client.method.fetch(url).await?;
         Self::from_str(&res)
     }
 

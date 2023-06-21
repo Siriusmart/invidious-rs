@@ -3,7 +3,7 @@ use crate::*;
 #[test]
 fn reqwest_sync() {
     ClientSync::default()
-        .method(MethodSync::ReqwestSync)
+        .method(MethodSync::REQWEST)
         .video("FhhyqkbtaR4", None)
         .unwrap();
 }
@@ -11,7 +11,7 @@ fn reqwest_sync() {
 #[test]
 fn ureq_sync() {
     ClientSync::default()
-        .method(MethodSync::UreqSync)
+        .method(MethodSync::UREQ)
         .video("FhhyqkbtaR4", None)
         .unwrap();
 }
@@ -19,7 +19,7 @@ fn ureq_sync() {
 #[test]
 fn httpreq_sync() {
     ClientSync::default()
-        .method(MethodSync::HttpReqSync)
+        .method(MethodSync::HTTPREQ)
         .video("FhhyqkbtaR4", None)
         .unwrap();
 }
@@ -27,7 +27,7 @@ fn httpreq_sync() {
 #[test]
 fn minreq_http_sync() {
     ClientSync::default()
-        .method(MethodSync::MinReqHttpSync)
+        .method(MethodSync::MINREQ_HTTP)
         .video("FhhyqkbtaR4", None)
         .unwrap();
 }
@@ -35,7 +35,7 @@ fn minreq_http_sync() {
 #[test]
 fn minreq_sync() {
     ClientSync::default()
-        .method(MethodSync::MinReqSync)
+        .method(MethodSync::MINREQ)
         .video("FhhyqkbtaR4", None)
         .unwrap();
 }
@@ -43,7 +43,7 @@ fn minreq_sync() {
 #[test]
 fn isahc_sync() {
     ClientSync::default()
-        .method(MethodSync::IsahcSync)
+        .method(MethodSync::ISAHC)
         .video("FhhyqkbtaR4", None)
         .unwrap();
 }
@@ -51,7 +51,7 @@ fn isahc_sync() {
 #[tokio::test]
 async fn reqwest_async() {
     ClientAsync::default()
-        .method(MethodAsync::ReqwestAsync)
+        .method(MethodAsync::REQWEST)
         .video("FhhyqkbtaR4", None)
         .await
         .unwrap();
@@ -60,8 +60,33 @@ async fn reqwest_async() {
 #[tokio::test]
 async fn isahc_async() {
     ClientAsync::default()
-        .method(MethodAsync::IsahcAsync)
+        .method(MethodAsync::ISAHC)
         .video("FhhyqkbtaR4", None)
         .await
         .unwrap();
+}
+
+#[test]
+fn custom_sync() {
+    ClientSync::default()
+        .custom_method(Box::new(sync_fetch))
+        .video("FhhyqkbtaR4", None)
+        .unwrap();
+}
+
+fn sync_fetch(url: &str) -> MethodReturn {
+    Ok(reqwest::blocking::get(url)?.text()?)
+}
+
+#[tokio::test]
+async fn custom_async() {
+    ClientAsync::default()
+        .custom_method(Box::new(async_fetch))
+        .video("FhhyqkbtaR4", None)
+        .await
+        .unwrap();
+}
+
+async fn async_fetch(url: String) -> MethodReturn {
+    Ok(reqwest::get(url).await?.text().await?)
 }

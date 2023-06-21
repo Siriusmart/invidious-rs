@@ -1,3 +1,5 @@
+#[cfg(feature = "async")]
+use crate::functions::into_method;
 #[cfg(any(feature = "sync", feature = "async"))]
 use crate::{
     structs::{
@@ -9,10 +11,11 @@ use crate::{
 };
 #[cfg(any(feature = "sync", feature = "async"))]
 use std::error::Error;
+#[cfg(feature = "async")]
+use std::future::Future;
 
 /// A blocking client struct, containing all info needed to perform a fetch.
 #[cfg(feature = "sync")]
-#[derive(Clone)]
 pub struct ClientSync {
     /// Method of fetching, all methods in ClientSync are blocking methods.
     pub method: MethodSync,
@@ -53,9 +56,20 @@ impl ClientSync {
         self.method = method;
     }
 
+    /// Modifies the method of the ClientSync using a custom fetch function.
+    pub fn set_custom_method(&mut self, f: SyncMethodCustom) {
+        self.method = MethodSync::Custom(f);
+    }
+
     /// Takes ownership of the method and returns a new, modifed ClientSync with changed method.
     pub fn method(mut self, method: MethodSync) -> Self {
         self.set_method(method);
+        self
+    }
+
+    /// Takes ownership of the method and returns a new, modifed ClientSync with custom method.
+    pub fn custom_method(mut self, f: SyncMethodCustom) -> Self {
+        self.set_custom_method(f);
         self
     }
 }
@@ -200,9 +214,27 @@ impl ClientAsync {
         self.method = method;
     }
 
+    /// Modifies the custom method of the ClientAsync.
+    pub fn set_custom_method<F, FOutput>(&mut self, f: F)
+    where
+        F: Send + Sync + Fn(String) -> FOutput + 'static,
+        FOutput: Future<Output = MethodReturn> + Send + 'static,
+    {
+        self.method = MethodAsync::Custom(into_method(f));
+    }
+
     /// Takes ownership of the method and returns a new, modifed ClientAsync with changed method.
     pub fn method(mut self, method: MethodAsync) -> Self {
         self.set_method(method);
+        self
+    }
+
+    pub fn custom_method<F, FOutput>(mut self, f: F) -> Self
+    where
+        F: Send + Sync + Fn(String) -> FOutput + 'static,
+        FOutput: Future<Output = MethodReturn> + Send + 'static,
+    {
+        self.method = MethodAsync::Custom(into_method(f));
         self
     }
 }
