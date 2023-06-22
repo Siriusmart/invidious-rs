@@ -3,11 +3,15 @@
 
 use std::{future::Future, pin::Pin};
 
+/// Type of a custom sync fetch function
 pub type SyncMethodCustom = Box<dyn Fn(&str) -> MethodReturn>;
+/// Type of a custom async fetch function
 pub type AsyncMethodCustom =
     Box<dyn Fn(String) -> Pin<Box<dyn Future<Output = MethodReturn> + Send>> + Send + Sync>;
+/// Return type of fetch functions
 pub type MethodReturn = Result<String, Box<dyn std::error::Error>>;
 
+/// Sync request methods that can be either a preset or a custom function
 #[cfg(feature = "sync")]
 pub enum MethodSync {
     Preset(SyncMethodPreset),
@@ -49,6 +53,7 @@ impl Default for MethodSync {
     }
 }
 
+/// Async request methods that can be either a preset or a custom function
 #[cfg(feature = "async")]
 pub enum MethodAsync {
     Preset(AsyncMethodPreset),

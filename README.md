@@ -6,7 +6,7 @@ Rust bindings for the [Invidious API](https://docs.invidious.io/api).
 >
 > ~ The Invidious team on [YouTube trying to take them down](https://github.com/iv-org/invidious/issues/3872).
 
-Go show them some love by [donating](https://invidious.io/donate/) and starring their
+Go show them some support by [donating](https://invidious.io/donate/) and starring their
 [GitHub repos](https://github.com/iv-org)!
 
 ### Quickstart
