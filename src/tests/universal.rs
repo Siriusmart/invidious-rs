@@ -1,3 +1,5 @@
+use crate::ClientSyncTrait;
+
 #[test]
 fn trending() {
     crate::ClientSync::default().trending(None).unwrap();

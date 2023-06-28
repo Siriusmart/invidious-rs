@@ -2,9 +2,11 @@ use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::Value;
 use std::{error::Error, fmt::Debug};
 
+#[cfg(any(feature = "sync", feature = "async"))]
+use super::*;
 use crate::errors::*;
 #[cfg(any(feature = "sync", feature = "async"))]
-use crate::{functions::*, structs::*};
+use crate::functions::*;
 
 /// A trait which contains all basic functionalites a binding struct should include.
 #[cfg_attr(feature = "async", async_trait::async_trait)]
@@ -25,31 +27,31 @@ pub trait PublicItems {
 
     /// Blocking function to fetch the json data and deserialising it into Self.
     #[cfg(feature = "sync")]
-    fn fetch_sync(
-        client: &ClientSync,
+    fn fetch_sync<C: ClientSyncTrait>(
+        client: &C,
         id: Option<&str>,
         params: Option<&str>,
     ) -> Result<Self, Box<dyn Error>>
     where
         Self: Sized + DeserializeOwned,
     {
-        let url = Self::url(&client.instance, url_params(id, params));
-        let res = client.method.fetch(&url)?;
+        let url = Self::url(client.get_instance(), url_params(id, params));
+        let res = client.fetch(&url)?;
         Self::from_str(&res)
     }
 
     /// Async function to fetch the json data and deserialising it into Self.
     #[cfg(feature = "async")]
-    async fn fetch_async(
-        client: &ClientAsync,
+    async fn fetch_async<C: ClientAsyncTrait>(
+        client: &C,
         id: Option<&str>,
         params: Option<&str>,
     ) -> Result<Self, Box<dyn Error>>
     where
         Self: Sized + DeserializeOwned,
     {
-        let url = Self::url(&client.instance, url_params(id, params));
-        let res = client.method.fetch(url).await?;
+        let url = Self::url(client.get_instance(), url_params(id, params));
+        let res = client.fetch(&url).await?;
         Self::from_str(&res)
     }
 

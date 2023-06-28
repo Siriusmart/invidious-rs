@@ -1,3 +1,5 @@
+use crate::ClientSyncTrait;
+
 #[test]
 fn channel() {
     crate::ClientSync::default()

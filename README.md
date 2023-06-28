@@ -60,34 +60,12 @@ invidious = { version = "6.0", no-default-features = true, features = ["isahc_as
 
 ```rust
 let video = ClientAsync::default()
-    .method(MethodAsync::ISAHC)
+    .method(MethodAsync::Isahc)
     .video("fBj3nEdCjkY", None).await.unwrap();
 ```
 
-#### Custom methods
-
-If the existing methods are not suitable for use (takes too long to compile, resource
-inefficient, does not support async runtime), you can use your own fetch function instead.
-
-```toml
-invidious = { version = "6.0", no-default-features = true, features = ["async"]}
-```
-
-See no fetch features are enabled, just `async` which enables `ClientAsync` and related code.
-
-```rust
-#[tokio::main]
-async fn main() {
-    let video = ClientAsync::default()
-        .custom_method(Box::new(custom_fetch))
-        .video("fBj3nEdCjkY", None).await.unwrap();
-}
-
-// MethodReturn is just short for `Result<String, Box<dyn Error>>`
-async fn custom_fetch(url: String) -> MethodReturn {
-    Ok(reqwest::get(url).await?.text().await?)
-}
-```
+If none of the fetch methods matches your needs, consider implmenting your own client struct.
+([Sync](./trait.ClientSyncTrait.html) and [async](./trait.ClientAsyncTrait.html))
 
 ### Features
 
