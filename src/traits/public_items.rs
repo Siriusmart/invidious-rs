@@ -18,10 +18,14 @@ pub trait PublicItems {
         Self: Sized + DeserializeOwned,
     {
         let value: Value = serde_json::from_str(s)?;
+        let error = value["error"].clone();
 
-        match &value["error"] {
-            Value::String(s) => Err(Box::new(InvidiousError::InvalidRequest(s.clone()))),
-            _ => Ok(Self::from_value(value)?),
+        match Self::from_value(value) {
+            Ok(value) => Ok(value),
+            Err(e) => match error {
+                Value::String(s) => Err(InvidiousError::InvalidRequest(s).into()),
+                _ => Err(InvidiousError::InvalidRequest(e.to_string()).into()),
+            },
         }
     }
 

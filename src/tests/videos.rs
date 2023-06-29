@@ -20,3 +20,10 @@ fn captions() {
         .captions("FhhyqkbtaR4", None)
         .unwrap();
 }
+
+#[test]
+fn upcoming() {
+    crate::ClientSync::default()
+        .video("WyqKuHQ5CE8", None)
+        .unwrap();
+}
