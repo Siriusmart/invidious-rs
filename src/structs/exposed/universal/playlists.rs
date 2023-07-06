@@ -36,4 +36,31 @@ impl PublicItems for Playlist {
     fn url(server: &str, args: String) -> String {
         format!("{}/api/v1/playlists/{}", server, args)
     }
+
+    fn from_value(mut value: serde_json::Value) -> Result<Self, Box<dyn std::error::Error>>
+    where
+        Self: Sized + serde::de::DeserializeOwned,
+    {
+        if process_value(&mut value).is_none() {
+            return Err(crate::errors::InvidiousError::InvalidRequest("You are either missing `playlistThumbnail`, or `playlistThumbnail` is null and `videos[0].videoThumbnails.url` does not exist".to_string()).into());
+        }
+
+        Ok(serde_json::from_value(value)?)
+    }
+}
+
+fn process_value(value: &mut serde_json::Value) -> Option<()> {
+    if value.get("playlistThumbnail")?.is_null() {
+        *value.get_mut("playlistThumbnail")? = value
+            .get("videos")?
+            .as_array()?
+            .first()?
+            .get("videoThumbnails")?
+            .as_array()?
+            .first()?
+            .get("url")?
+            .clone()
+    }
+
+    Some(())
 }

@@ -25,6 +25,7 @@ isahc_sync = ["dep:isahc", "sync"]
 isahc_async = ["dep:isahc", "async"]
 async = ["async-trait"]
 sync = []
+high-level = []
 
 [dependencies]
 reqwest = {version = "0.11", optional = true}
