@@ -1,8 +1,5 @@
-use std::error::Error;
-
 use crate::{structs::hidden::ChannelVideo, traits::PublicItems};
-use serde::{de::DeserializeOwned, Deserialize, Serialize};
-use serde_json::Value;
+use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ChannelVideos {
@@ -14,10 +11,10 @@ impl PublicItems for ChannelVideos {
         format!("{server}/api/v1/channels/videos/{args}")
     }
 
-    fn from_value(value: Value) -> Result<Self, Box<dyn Error>>
-    where
-        Self: Sized + DeserializeOwned,
-    {
-        Ok(serde_json::from_value(value)?)
-    }
+    // fn from_value(value: Value) -> Result<Self, serde_json::Error>
+    // where
+    //     Self: Sized + DeserializeOwned,
+    // {
+    //     Ok(serde_json::from_value(value)?)
+    // }
 }

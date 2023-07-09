@@ -1,4 +1,4 @@
-use crate::traits::PublicItems;
+use crate::{traits::PublicItems, InvidiousError};
 
 pub type Annotations = String;
 
@@ -7,11 +7,11 @@ impl PublicItems for Annotations {
         format!("{server}/api/v1/annotations/{args}")
     }
 
-    fn from_str<'a>(s: &str) -> Result<Self, Box<dyn std::error::Error>>
+    fn from_str<'a>(s: String) -> Result<Self, InvidiousError>
     where
         Self: Sized + serde::de::DeserializeOwned,
     {
-        Ok(s.to_string())
+        Ok(s)
     }
 
     fn to_string<'a>(&self) -> String
@@ -21,10 +21,10 @@ impl PublicItems for Annotations {
         self.clone()
     }
 
-    fn from_value<'a>(value: serde_json::Value) -> Result<Self, Box<dyn std::error::Error>>
-    where
-        Self: Sized + serde::de::DeserializeOwned,
-    {
-        Ok(serde_json::to_string(&value)?)
-    }
+    // fn from_value<'a>(value: serde_json::Value) -> Result<Self, InvidiousError>
+    // where
+    //     Self: Sized + serde::de::DeserializeOwned,
+    // {
+    //     Ok(serde_json::to_string(&value)?)
+    // }
 }

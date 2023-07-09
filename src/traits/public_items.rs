@@ -1,6 +1,6 @@
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::Value;
-use std::{error::Error, fmt::Debug};
+use std::fmt::Debug;
 
 #[cfg(any(feature = "sync", feature = "async"))]
 use super::*;
@@ -13,18 +13,17 @@ use crate::functions::*;
 pub trait PublicItems {
     // Error gate keeping
     /// Converts &str to Self.
-    fn from_str(s: &str) -> Result<Self, Box<dyn Error>>
+    fn from_str(s: String) -> Result<Self, InvidiousError>
     where
         Self: Sized + DeserializeOwned,
     {
-        let value: Value = serde_json::from_str(s)?;
-        let error = value["error"].clone();
-
+        let value: Value = InvidiousError::as_serde_error(serde_json::from_str(&s), Some(s))?;
+        let error = value["error"].as_str().map(str::to_string);
         match Self::from_value(value) {
-            Ok(value) => Ok(value),
+            Ok(val) => Ok(val),
             Err(e) => match error {
-                Value::String(s) => Err(InvidiousError::InvalidRequest(s).into()),
-                _ => Err(InvidiousError::InvalidRequest(e.to_string()).into()),
+                Some(s) => Err(InvidiousError::ApiError { message: s }),
+                None => Err(e),
             },
         }
     }
@@ -35,13 +34,13 @@ pub trait PublicItems {
         client: &C,
         id: Option<&str>,
         params: Option<&str>,
-    ) -> Result<Self, Box<dyn Error>>
+    ) -> Result<Self, InvidiousError>
     where
         Self: Sized + DeserializeOwned,
     {
         let url = Self::url(client.get_instance(), url_params(id, params));
-        let res = client.fetch(&url)?;
-        Self::from_str(&res)
+        let res = InvidiousError::as_fetch_error(client.fetch(&url))?;
+        Self::from_str(res)
     }
 
     /// Async function to fetch the json data and deserialising it into Self.
@@ -50,21 +49,21 @@ pub trait PublicItems {
         client: &C,
         id: Option<&str>,
         params: Option<&str>,
-    ) -> Result<Self, Box<dyn Error>>
+    ) -> Result<Self, InvidiousError>
     where
         Self: Sized + DeserializeOwned,
     {
         let url = Self::url(client.get_instance(), url_params(id, params));
-        let res = client.fetch(&url).await?;
-        Self::from_str(&res)
+        let res = InvidiousError::as_fetch_error(client.fetch(&url).await)?;
+        Self::from_str(res)
     }
 
     /// Converts Value to Self.
-    fn from_value(value: Value) -> Result<Self, Box<dyn Error>>
+    fn from_value(value: Value) -> Result<Self, InvidiousError>
     where
         Self: Sized + DeserializeOwned,
     {
-        Ok(serde_json::from_value(value)?)
+        InvidiousError::as_serde_error(serde_json::from_value(value), None)
     }
 
     /// Converts Self to a string.

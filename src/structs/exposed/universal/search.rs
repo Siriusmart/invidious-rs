@@ -1,8 +1,7 @@
-use std::error::Error;
-
 use crate::{
     structs::hidden::{SearchItem, SearchItemTransition},
     traits::PublicItems,
+    InvidiousError,
 };
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::Value;
@@ -17,11 +16,12 @@ impl PublicItems for Search {
         format!("{}/api/v1/search/{}", server, args)
     }
 
-    fn from_value(value: Value) -> Result<Self, Box<dyn Error>>
+    fn from_value(value: Value) -> Result<Self, InvidiousError>
     where
         Self: Sized + DeserializeOwned,
     {
-        let search_transition: Vec<SearchItemTransition> = serde_json::from_value(value)?;
+        let search_transition: Vec<SearchItemTransition> =
+            InvidiousError::as_serde_error(serde_json::from_value(value), None)?;
         let items: Vec<SearchItem> = search_transition
             .into_iter()
             .map(|search_item_transition| search_item_transition.proccess())

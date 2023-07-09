@@ -1,6 +1,7 @@
 #[cfg(any(feature = "sync", feature = "async"))]
 use std::error::Error;
 
+use crate::InvidiousError;
 #[cfg(any(feature = "sync", feature = "async"))]
 use crate::{channel::*, universal::*, video::*, PublicItems};
 
@@ -29,42 +30,42 @@ where
     fn fetch(&self, url: &str) -> Result<String, Box<dyn Error>>;
 
     /// `/api/v1/stats` endpoint.
-    fn stats(&self, params: Option<&str>) -> Result<Stats, Box<dyn Error>> {
+    fn stats(&self, params: Option<&str>) -> Result<Stats, InvidiousError> {
         Stats::fetch_sync(self, None, params)
     }
 
     /// `/api/v1/videos/:ID` endpoint.
-    fn video(&self, id: &str, params: Option<&str>) -> Result<Video, Box<dyn Error>> {
+    fn video(&self, id: &str, params: Option<&str>) -> Result<Video, InvidiousError> {
         Video::fetch_sync(self, Some(id), params)
     }
 
     /// `/api/v1/comments/:ID` endpoint.
-    fn comments(&self, id: &str, params: Option<&str>) -> Result<Comments, Box<dyn Error>> {
+    fn comments(&self, id: &str, params: Option<&str>) -> Result<Comments, InvidiousError> {
         Comments::fetch_sync(self, Some(id), params)
     }
 
     /// `/api/v1/captions/:id` endpoint.
-    fn captions(&self, id: &str, params: Option<&str>) -> Result<Captions, Box<dyn Error>> {
+    fn captions(&self, id: &str, params: Option<&str>) -> Result<Captions, InvidiousError> {
         Captions::fetch_sync(self, Some(id), params)
     }
 
     /// `/api/v1/annotations/:id` endpoint.
-    fn annotations(&self, id: &str, params: Option<&str>) -> Result<Annotations, Box<dyn Error>> {
+    fn annotations(&self, id: &str, params: Option<&str>) -> Result<Annotations, InvidiousError> {
         Annotations::fetch_sync(self, Some(id), params)
     }
 
     /// `/api/v1/trending` endpoint.
-    fn trending(&self, params: Option<&str>) -> Result<Trending, Box<dyn Error>> {
+    fn trending(&self, params: Option<&str>) -> Result<Trending, InvidiousError> {
         Trending::fetch_sync(self, None, params)
     }
 
     /// `/api/v1/popular` endpoint.
-    fn popular(&self, params: Option<&str>) -> Result<Popular, Box<dyn Error>> {
+    fn popular(&self, params: Option<&str>) -> Result<Popular, InvidiousError> {
         Popular::fetch_sync(self, None, params)
     }
 
     /// `/api/v1/channel/:ID` endpoint.
-    fn channel(&self, id: &str, params: Option<&str>) -> Result<Channel, Box<dyn Error>> {
+    fn channel(&self, id: &str, params: Option<&str>) -> Result<Channel, InvidiousError> {
         Channel::fetch_sync(self, Some(id), params)
     }
 
@@ -73,7 +74,7 @@ where
         &self,
         id: &str,
         params: Option<&str>,
-    ) -> Result<ChannelVideos, Box<dyn Error>> {
+    ) -> Result<ChannelVideos, InvidiousError> {
         ChannelVideos::fetch_sync(self, Some(id), params)
     }
 
@@ -82,7 +83,7 @@ where
         &self,
         id: &str,
         params: Option<&str>,
-    ) -> Result<ChannelPlaylists, Box<dyn Error>> {
+    ) -> Result<ChannelPlaylists, InvidiousError> {
         ChannelPlaylists::fetch_sync(self, Some(id), params)
     }
 
@@ -91,7 +92,7 @@ where
         &self,
         id: &str,
         params: Option<&str>,
-    ) -> Result<ChannelComments, Box<dyn Error>> {
+    ) -> Result<ChannelComments, InvidiousError> {
         ChannelComments::fetch_sync(self, Some(id), params)
     }
 
@@ -100,23 +101,28 @@ where
         &self,
         id: &str,
         params: Option<&str>,
-    ) -> Result<ChannelSearch, Box<dyn Error>> {
+    ) -> Result<ChannelSearch, InvidiousError> {
         ChannelSearch::fetch_sync(self, Some(id), params)
     }
 
     /// `/api/v1/search` endpoint.
-    fn search(&self, params: Option<&str>) -> Result<Search, Box<dyn Error>> {
+    fn search(&self, params: Option<&str>) -> Result<Search, InvidiousError> {
         Search::fetch_sync(self, None, params)
     }
 
     /// `/api/v1/playlists/:ID` endpoint.
-    fn playlist(&self, id: &str, params: Option<&str>) -> Result<Playlist, Box<dyn Error>> {
+    fn playlist(&self, id: &str, params: Option<&str>) -> Result<Playlist, InvidiousError> {
         Playlist::fetch_sync(self, Some(id), params)
     }
 
     /// `/api/v1/mixes/:ID` endpoint.
-    fn mix(&self, id: &str, params: Option<&str>) -> Result<Mix, Box<dyn Error>> {
+    fn mix(&self, id: &str, params: Option<&str>) -> Result<Mix, InvidiousError> {
         Mix::fetch_sync(self, Some(id), params)
+    }
+
+    /// `/api/v1/search/suggestions` endpoint.
+    fn search_suggestions(&self, params: Option<&str>) -> Result<Suggestions, InvidiousError> {
+        Suggestions::fetch_sync(self, None, params)
     }
 }
 
@@ -151,22 +157,22 @@ where
     async fn fetch(&self, url: &str) -> Result<String, Box<dyn Error>>;
 
     /// `/api/v1/stats` endpoint.
-    async fn stats(&self, params: Option<&str>) -> Result<Stats, Box<dyn Error>> {
+    async fn stats(&self, params: Option<&str>) -> Result<Stats, InvidiousError> {
         Stats::fetch_async(self, None, params).await
     }
 
     /// `/api/v1/videos/:ID` endpoint.
-    async fn video(&self, id: &str, params: Option<&str>) -> Result<Video, Box<dyn Error>> {
+    async fn video(&self, id: &str, params: Option<&str>) -> Result<Video, InvidiousError> {
         Video::fetch_async(self, Some(id), params).await
     }
 
     /// `/api/v1/comments/:ID` endpoint.
-    async fn comments(&self, id: &str, params: Option<&str>) -> Result<Comments, Box<dyn Error>> {
+    async fn comments(&self, id: &str, params: Option<&str>) -> Result<Comments, InvidiousError> {
         Comments::fetch_async(self, Some(id), params).await
     }
 
     /// `/api/v1/comments/:ID` endpoint.
-    async fn captions(&self, id: &str, params: Option<&str>) -> Result<Captions, Box<dyn Error>> {
+    async fn captions(&self, id: &str, params: Option<&str>) -> Result<Captions, InvidiousError> {
         Captions::fetch_async(self, Some(id), params).await
     }
 
@@ -175,22 +181,22 @@ where
         &self,
         id: &str,
         params: Option<&str>,
-    ) -> Result<Annotations, Box<dyn Error>> {
+    ) -> Result<Annotations, InvidiousError> {
         Annotations::fetch_async(self, Some(id), params).await
     }
 
     /// `/api/v1/trending` endpoint.
-    async fn trending(&self, params: Option<&str>) -> Result<Trending, Box<dyn Error>> {
+    async fn trending(&self, params: Option<&str>) -> Result<Trending, InvidiousError> {
         Trending::fetch_async(self, None, params).await
     }
 
     /// `/api/v1/popular` endpoint.
-    async fn popular(&self, params: Option<&str>) -> Result<Popular, Box<dyn Error>> {
+    async fn popular(&self, params: Option<&str>) -> Result<Popular, InvidiousError> {
         Popular::fetch_async(self, None, params).await
     }
 
     /// `/api/v1/channel/:ID` endpoint.
-    async fn channel(&self, id: &str, params: Option<&str>) -> Result<Channel, Box<dyn Error>> {
+    async fn channel(&self, id: &str, params: Option<&str>) -> Result<Channel, InvidiousError> {
         Channel::fetch_async(self, Some(id), params).await
     }
 
@@ -199,7 +205,7 @@ where
         &self,
         id: &str,
         params: Option<&str>,
-    ) -> Result<ChannelVideos, Box<dyn Error>> {
+    ) -> Result<ChannelVideos, InvidiousError> {
         ChannelVideos::fetch_async(self, Some(id), params).await
     }
 
@@ -208,7 +214,7 @@ where
         &self,
         id: &str,
         params: Option<&str>,
-    ) -> Result<ChannelPlaylists, Box<dyn Error>> {
+    ) -> Result<ChannelPlaylists, InvidiousError> {
         ChannelPlaylists::fetch_async(self, Some(id), params).await
     }
 
@@ -217,7 +223,7 @@ where
         &self,
         id: &str,
         params: Option<&str>,
-    ) -> Result<ChannelComments, Box<dyn Error>> {
+    ) -> Result<ChannelComments, InvidiousError> {
         ChannelComments::fetch_async(self, Some(id), params).await
     }
 
@@ -226,23 +232,31 @@ where
         &self,
         id: &str,
         params: Option<&str>,
-    ) -> Result<ChannelSearch, Box<dyn Error>> {
+    ) -> Result<ChannelSearch, InvidiousError> {
         ChannelSearch::fetch_async(self, Some(id), params).await
     }
 
     /// `/api/v1/search` endpoint.
-    async fn search(&self, params: Option<&str>) -> Result<Search, Box<dyn Error>> {
+    async fn search(&self, params: Option<&str>) -> Result<Search, InvidiousError> {
         Search::fetch_async(self, None, params).await
     }
 
     /// `/api/v1/playlists/:ID` endpoint.
-    async fn playlist(&self, id: &str, params: Option<&str>) -> Result<Playlist, Box<dyn Error>> {
+    async fn playlist(&self, id: &str, params: Option<&str>) -> Result<Playlist, InvidiousError> {
         Playlist::fetch_async(self, Some(id), params).await
     }
 
     /// `/api/v1/mixes/:ID` endpoint.
-    async fn mix(&self, id: &str, params: Option<&str>) -> Result<Mix, Box<dyn Error>> {
+    async fn mix(&self, id: &str, params: Option<&str>) -> Result<Mix, InvidiousError> {
         Mix::fetch_async(self, Some(id), params).await
+    }
+
+    /// `/api/v1/search/suggestions` endpoint.
+    async fn search_suggestions(
+        &self,
+        params: Option<&str>,
+    ) -> Result<Suggestions, InvidiousError> {
+        Suggestions::fetch_async(self, None, params).await
     }
 }
 

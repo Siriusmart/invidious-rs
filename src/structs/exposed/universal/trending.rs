@@ -1,6 +1,4 @@
-use std::error::Error;
-
-use crate::{structs::hidden::TrendingVideo, traits::PublicItems};
+use crate::{structs::hidden::TrendingVideo, traits::PublicItems, InvidiousError};
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::Value;
 
@@ -14,12 +12,12 @@ impl PublicItems for Trending {
         format!("{server}/api/v1/trending/{args}")
     }
 
-    fn from_value<'a>(value: Value) -> Result<Self, Box<dyn Error>>
+    fn from_value<'a>(value: Value) -> Result<Self, InvidiousError>
     where
         Self: Sized + DeserializeOwned,
     {
         Ok(Self {
-            videos: serde_json::from_value(value)?,
+            videos: InvidiousError::as_serde_error(serde_json::from_value(value), None)?,
         })
     }
 }

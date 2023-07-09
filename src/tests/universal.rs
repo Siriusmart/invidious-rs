@@ -28,3 +28,12 @@ fn search() {
         .search(Some("q=testing"))
         .unwrap();
 }
+
+#[test]
+fn search_suggestions() {
+    assert!(!crate::ClientSync::default()
+        .search_suggestions(Some("q=test"))
+        .unwrap()
+        .suggestions
+        .is_empty())
+}

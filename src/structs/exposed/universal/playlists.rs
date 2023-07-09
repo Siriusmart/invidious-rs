@@ -1,6 +1,7 @@
 use crate::{
     structs::hidden::{AuthorThumbnail, PlaylistItem},
     traits::PublicItems,
+    InvidiousError,
 };
 use serde::{Deserialize, Serialize};
 
@@ -37,15 +38,15 @@ impl PublicItems for Playlist {
         format!("{}/api/v1/playlists/{}", server, args)
     }
 
-    fn from_value(mut value: serde_json::Value) -> Result<Self, Box<dyn std::error::Error>>
+    fn from_value(mut value: serde_json::Value) -> Result<Self, InvidiousError>
     where
         Self: Sized + serde::de::DeserializeOwned,
     {
         if process_value(&mut value).is_none() {
-            return Err(crate::errors::InvidiousError::InvalidRequest("You are either missing `playlistThumbnail`, or `playlistThumbnail` is null and `videos[0].videoThumbnails.url` does not exist".to_string()).into());
+            return Err(crate::errors::InvidiousError::as_message("You are either missing `playlistThumbnail`, or `playlistThumbnail` is null and `videos[0].videoThumbnails.url` does not exist".to_string()));
         }
 
-        Ok(serde_json::from_value(value)?)
+        InvidiousError::as_serde_error(serde_json::from_value(value), None)
     }
 }
 

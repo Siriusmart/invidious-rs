@@ -130,7 +130,10 @@ pub use structs::*;
 pub use traits::*;
 
 /// Default instance used in `ClientSync/ClientAsync::default()`.
-pub const INSTANCE: &str = "https://vid.puffyan.us";
+pub const INSTANCE: &str = "https://inv.bp.projectsegfau.lt";
+
+/// Some instances required a user agent to be set, but it is not implmented yet
+pub const USER_AGENT: &str = concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION"),);
 
 #[cfg(feature = "async")]
 pub use async_trait;
