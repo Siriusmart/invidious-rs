@@ -23,7 +23,7 @@ pub struct SearchItemTransition {
     #[serde(rename = "publishedText")]
     pub published_text: Option<String>,
     #[serde(rename = "lengthSeconds")]
-    pub length_seconds: Option<u64>,
+    pub length_seconds: Option<u32>,
     #[serde(rename = "liveNow")]
     pub live_now: Option<bool>,
     pub paid: Option<bool>,
@@ -99,7 +99,7 @@ pub enum SearchItem {
         author: String,
         author_id: String,
         author_url: String,
-        length: u64,
+        length: u32,
         thumbnails: Vec<VideoThumbnail>,
         description: String,
         description_html: String,
