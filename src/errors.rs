@@ -26,7 +26,7 @@ impl Display for InvidiousError {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
         match self {
             Self::Fetch { error } => write!(f, "Error sending request: {error}"),
-            Self::ApiError { message } => write!(f, "API returned errer: {message}"),
+            Self::ApiError { message } => write!(f, "API returned error: {message}"),
             Self::SerdeError { error, .. } => write!(f, "Cannot deserialize response: {error}"),
             Self::Message { message } => write!(f, "Error message: {message}"),
         }
