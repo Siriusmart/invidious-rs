@@ -7,6 +7,7 @@ use std::error::Error;
 
 /// A blocking client struct, containing all info needed to perform a fetch.
 #[cfg(feature = "sync")]
+#[derive(Clone)]
 pub struct ClientSync {
     /// Method of fetching, all methods in ClientSync are blocking methods.
     pub method: MethodSync,
