@@ -64,7 +64,7 @@ where
         Popular::fetch_sync(self, None, params)
     }
 
-    /// `/api/v1/channel/:ID` endpoint.
+    /// `/api/v1/channels/:ID` endpoint.
     fn channel(&self, id: &str, params: Option<&str>) -> Result<Channel, InvidiousError> {
         Channel::fetch_sync(self, Some(id), params)
     }
