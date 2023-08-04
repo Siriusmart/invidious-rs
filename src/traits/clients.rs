@@ -195,7 +195,7 @@ where
         Popular::fetch_async(self, None, params).await
     }
 
-    /// `/api/v1/channel/:ID` endpoint.
+    /// `/api/v1/channels/:ID` endpoint.
     async fn channel(&self, id: &str, params: Option<&str>) -> Result<Channel, InvidiousError> {
         Channel::fetch_async(self, Some(id), params).await
     }
