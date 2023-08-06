@@ -1,8 +1,4 @@
-use crate::{
-    structs::hidden::{SearchItem, SearchItemTransition},
-    traits::PublicItems,
-    InvidiousError,
-};
+use crate::{structs::hidden::SearchItem, traits::PublicItems, InvidiousError};
 use serde::{de::DeserializeOwned, Deserialize, Serialize};
 use serde_json::Value;
 
@@ -20,12 +16,8 @@ impl PublicItems for Search {
     where
         Self: Sized + DeserializeOwned,
     {
-        let search_transition: Vec<SearchItemTransition> =
+        let items: Vec<SearchItem> =
             InvidiousError::as_serde_error(serde_json::from_value(value), None)?;
-        let items: Vec<SearchItem> = search_transition
-            .into_iter()
-            .map(|search_item_transition| search_item_transition.proccess())
-            .collect();
 
         Ok(Search { items })
     }

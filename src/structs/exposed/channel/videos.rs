@@ -1,9 +1,9 @@
-use crate::{structs::hidden::ChannelVideo, traits::PublicItems};
+use crate::{traits::PublicItems, CommonVideo};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ChannelVideos {
-    pub videos: Vec<ChannelVideo>,
+    pub videos: Vec<CommonVideo>,
 }
 
 impl PublicItems for ChannelVideos {

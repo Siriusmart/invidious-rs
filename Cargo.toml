@@ -1,6 +1,6 @@
 [package]
 name = "invidious"
-version = "0.6.4"
+version = "0.7.0"
 edition = "2021"
 authors = ["Siriusmart<siriusmart@tuta.io>"]
 description = "Get information about videos from YouTube with this simple Invidious API wrapper. Does not use the YouTube API (No tokens required)"

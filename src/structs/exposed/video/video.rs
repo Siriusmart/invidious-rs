@@ -1,10 +1,4 @@
-use crate::{
-    structs::hidden::{
-        AdaptiveFormat, AuthorThumbnail, Caption, CountryCode, FormatStream, Storyboard,
-        VideoShort, VideoThumbnail,
-    },
-    traits::PublicItems,
-};
+use crate::{structs::hidden::*, traits::PublicItems, *};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -13,7 +7,7 @@ pub struct Video {
     #[serde(rename = "videoId")]
     pub id: String,
     #[serde(rename = "videoThumbnails")]
-    pub thumbnails: Vec<VideoThumbnail>,
+    pub thumbnails: Vec<CommonThumbnail>,
     pub storyboards: Vec<Storyboard>,
     pub description: String,
     #[serde(rename = "descriptionHtml")]
@@ -46,7 +40,7 @@ pub struct Video {
     #[serde(rename = "authorUrl")]
     pub author_url: String,
     #[serde(rename = "authorThumbnails")]
-    pub author_thumbnails: Vec<AuthorThumbnail>,
+    pub author_thumbnails: Vec<CommonImage>,
 
     #[serde(rename = "subCountText")]
     pub sub_count_text: String,

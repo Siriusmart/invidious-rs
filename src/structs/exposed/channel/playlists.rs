@@ -1,9 +1,9 @@
-use crate::{structs::hidden::Playlist, traits::PublicItems};
+use crate::{traits::PublicItems, CommonPlaylist};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct ChannelPlaylists {
-    pub playlists: Vec<Playlist>,
+    pub playlists: Vec<CommonPlaylist>,
     pub continuation: Option<String>,
 }
 

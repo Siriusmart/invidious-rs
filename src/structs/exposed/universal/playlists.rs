@@ -1,8 +1,4 @@
-use crate::{
-    structs::hidden::{AuthorThumbnail, PlaylistItem},
-    traits::PublicItems,
-    InvidiousError,
-};
+use crate::{structs::hidden::*, traits::PublicItems, *};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -17,7 +13,7 @@ pub struct Playlist {
     #[serde(rename = "authorId")]
     pub author_id: String,
     #[serde(rename = "authorThumbnails")]
-    pub author_thumbnails: Vec<AuthorThumbnail>,
+    pub author_thumbnails: Vec<CommonImage>,
     pub description: String,
     #[serde(rename = "descriptionHtml")]
     pub description_html: String,

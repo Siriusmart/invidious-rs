@@ -1,7 +1,4 @@
-use crate::{
-    structs::hidden::{AuthorBanner, AuthorThumbnail, ChannelVideo, CountryCode, RelatedChannel},
-    traits::PublicItems,
-};
+use crate::{structs::hidden::*, traits::PublicItems, *};
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -13,12 +10,12 @@ pub struct Channel {
     #[serde(rename = "authorUrl")]
     pub url: String,
     #[serde(rename = "authorBanners")]
-    pub banners: Vec<AuthorBanner>,
+    pub banners: Vec<CommonImage>,
     #[serde(rename = "authorThumbnails")]
-    pub thumbnails: Vec<AuthorThumbnail>,
+    pub thumbnails: Vec<CommonImage>,
 
     #[serde(rename = "subCount")]
-    pub sub_count: u32,
+    pub subscribers: u32,
     #[serde(rename = "totalViews")]
     pub total_views: u64,
     pub joined: u64,
@@ -34,7 +31,7 @@ pub struct Channel {
     pub allowed_regions: Vec<CountryCode>,
 
     #[serde(rename = "latestVideos")]
-    pub lastest_videos: Vec<ChannelVideo>,
+    pub lastest_videos: Vec<CommonVideo>,
 
     #[serde(rename = "relatedChannels")]
     pub related_channels: Vec<RelatedChannel>,

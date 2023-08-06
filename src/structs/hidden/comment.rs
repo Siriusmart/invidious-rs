@@ -1,4 +1,4 @@
-use crate::structs::hidden::AuthorThumbnail;
+use crate::structs::CommonImage;
 use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
@@ -20,7 +20,7 @@ pub struct Comment {
 
     pub author: String,
     #[serde(rename = "authorThumbnails")]
-    pub author_thumbnails: Vec<AuthorThumbnail>,
+    pub author_thumbnails: Vec<CommonImage>,
     #[serde(rename = "authorId")]
     pub author_id: String,
     #[serde(rename = "authorUrl")]

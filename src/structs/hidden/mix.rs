@@ -1,5 +1,6 @@
-use crate::structs::hidden::VideoThumbnail;
 use serde::{Deserialize, Serialize};
+
+use crate::CommonThumbnail;
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct MixVideo {
@@ -11,7 +12,7 @@ pub struct MixVideo {
     author: String,
     #[serde(rename = "authorUrl")]
     author_url: String,
-    videos: Vec<VideoThumbnail>,
+    videos: Vec<CommonThumbnail>,
     index: u32,
     #[serde(rename = "lengthSeconds")]
     length: u32,
