@@ -1,7 +1,10 @@
 use serde::{Deserialize, Serialize};
 
+use crate::{channel::Channel, hidden::PlaylistItem, universal::Playlist, video::Video};
+
 // https://docs.invidious.io/api/common_types/#videoobject
 
+/// Shared image object as specified in https://docs.invidious.io/api/common_types/
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct CommonImage {
     pub url: String,
@@ -9,6 +12,7 @@ pub struct CommonImage {
     pub height: u32,
 }
 
+/// Shared thumbnail object as specified in https://docs.invidious.io/api/common_types/
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct CommonThumbnail {
     #[serde(default)]
@@ -18,7 +22,8 @@ pub struct CommonThumbnail {
     pub height: u32,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+/// Shared video object as specified in https://docs.invidious.io/api/common_types/
+#[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct CommonVideo {
     pub title: String,
     #[serde(rename = "videoId")]
@@ -61,7 +66,8 @@ pub struct CommonVideo {
     pub upcoming: bool,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+/// Shared channel object as specified in https://docs.invidious.io/api/common_types/
+#[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct CommonChannel {
     #[serde(rename = "author")]
     pub name: String,
@@ -86,7 +92,8 @@ pub struct CommonChannel {
     pub description_html: String,
 }
 
-#[derive(Serialize, Deserialize, Debug, Clone)]
+/// Shared playlist object as specified in https://docs.invidious.io/api/common_types/
+#[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct CommonPlaylist {
     title: String,
     #[serde(rename = "playlistId")]
@@ -98,8 +105,8 @@ pub struct CommonPlaylist {
     author: String,
     #[serde(rename = "authorId")]
     author_id: String,
-    #[serde(rename = "authorUrl")]
-    author_url: String,
+    // #[serde(rename = "authorUrl")]
+    // author_url: String,
     #[serde(rename = "authorVerified")]
     #[serde(default)]
     author_verified: bool,
@@ -109,6 +116,7 @@ pub struct CommonPlaylist {
     videos: Vec<CommonPlaylistVideo>,
 }
 
+/// Playlist video struct used in CommonPlaylist
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct CommonPlaylistVideo {
     title: String,
@@ -118,4 +126,73 @@ pub struct CommonPlaylistVideo {
     length: u32,
     #[serde(rename = "videoThumbnails")]
     thumbnails: Vec<CommonThumbnail>,
+}
+
+impl From<Video> for CommonVideo {
+    fn from(value: Video) -> Self {
+        Self {
+            title: value.title,
+            id: value.id,
+            author: value.author,
+            author_id: value.author_id,
+            author_url: value.author_url,
+            thumbnails: value.thumbnails,
+            description: value.description,
+            description_html: value.description_html,
+            views: value.views,
+            length: value.length,
+            published: value.published,
+            published_text: value.published_text,
+            premiere_timestamp: value.premiere_timestamp,
+            live: value.live,
+            premium: value.premium,
+            upcoming: value.upcoming,
+        }
+    }
+}
+
+impl From<PlaylistItem> for CommonPlaylistVideo {
+    fn from(value: PlaylistItem) -> Self {
+        Self {
+            title: value.title,
+            id: value.id,
+            length: value.length,
+            thumbnails: value.thumbnails,
+        }
+    }
+}
+
+impl From<Playlist> for CommonPlaylist {
+    fn from(value: Playlist) -> Self {
+        Self {
+            title: value.title,
+            id: value.id,
+            thumbnail: value.thumbnail,
+            author: value.author,
+            author_id: value.author_id,
+            video_count: value.video_count,
+            videos: value
+                .videos
+                .into_iter()
+                .map(CommonPlaylistVideo::from)
+                .collect(),
+            ..Default::default()
+        }
+    }
+}
+
+impl From<Channel> for CommonChannel {
+    fn from(value: Channel) -> Self {
+        Self {
+            name: value.name,
+            id: value.id,
+            url: value.url,
+            thumbnails: value.thumbnails,
+            auto_generated: value.auto_generated,
+            subscribers: value.subscribers,
+            description: value.description,
+            description_html: value.description_html,
+            ..Default::default()
+        }
+    }
 }

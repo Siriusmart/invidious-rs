@@ -55,6 +55,9 @@ pub struct Video {
     pub live: bool,
     #[serde(rename = "isUpcoming")]
     pub upcoming: bool,
+    #[serde(rename = "premiereTimestamp")]
+    #[serde(default)]
+    pub premiere_timestamp: u64,
     #[serde(rename = "dashUrl")]
     pub dash: String,
 
