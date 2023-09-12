@@ -95,37 +95,37 @@ pub struct CommonChannel {
 /// Shared playlist object as specified in https://docs.invidious.io/api/common_types/
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct CommonPlaylist {
-    title: String,
+    pub title: String,
     #[serde(rename = "playlistId")]
-    id: String,
+    pub id: String,
     #[serde(rename = "playlistThumbnail")]
     #[serde(default)]
-    thumbnail: String,
+    pub thumbnail: String,
 
-    author: String,
+    pub author: String,
     #[serde(rename = "authorId")]
-    author_id: String,
+    pub author_id: String,
     // #[serde(rename = "authorUrl")]
-    // author_url: String,
+    // pub author_url: String,
     #[serde(rename = "authorVerified")]
     #[serde(default)]
-    author_verified: bool,
+    pub author_verified: bool,
 
     #[serde(rename = "videoCount")]
-    video_count: u32,
-    videos: Vec<CommonPlaylistVideo>,
+    pub video_count: u32,
+    pub videos: Vec<CommonPlaylistVideo>,
 }
 
 /// Playlist video struct used in CommonPlaylist
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct CommonPlaylistVideo {
-    title: String,
+    pub title: String,
     #[serde(rename = "videoId")]
-    id: String,
+    pub id: String,
     #[serde(rename = "lengthSeconds")]
-    length: u32,
+    pub length: u32,
     #[serde(rename = "videoThumbnails")]
-    thumbnails: Vec<CommonThumbnail>,
+    pub thumbnails: Vec<CommonThumbnail>,
 }
 
 impl From<Video> for CommonVideo {
