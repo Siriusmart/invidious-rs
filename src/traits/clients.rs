@@ -45,6 +45,8 @@ where
     }
 
     /// `/api/v1/captions/:id` endpoint.
+    ///
+    /// Use `client.fetch(caption_url, client.instance)` to get the real captions file.
     fn captions(&self, id: &str, params: Option<&str>) -> Result<Captions, InvidiousError> {
         Captions::fetch_sync(self, Some(id), params)
     }
@@ -171,7 +173,9 @@ where
         Comments::fetch_async(self, Some(id), params).await
     }
 
-    /// `/api/v1/comments/:ID` endpoint.
+    /// `/api/v1/captions/:ID` endpoint.
+    ///
+    /// Use `client.fetch(caption_url, client.instance)` to get the real captions file.
     async fn captions(&self, id: &str, params: Option<&str>) -> Result<Captions, InvidiousError> {
         Captions::fetch_async(self, Some(id), params).await
     }
