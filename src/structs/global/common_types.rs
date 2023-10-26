@@ -4,7 +4,7 @@ use crate::{channel::Channel, hidden::PlaylistItem, universal::Playlist, video::
 
 // https://docs.invidious.io/api/common_types/#videoobject
 
-/// Shared image object as specified in https://docs.invidious.io/api/common_types/
+/// Shared image object as specified in <https://docs.invidious.io/api/common_types/>
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct CommonImage {
     pub url: String,
@@ -12,7 +12,7 @@ pub struct CommonImage {
     pub height: u32,
 }
 
-/// Shared thumbnail object as specified in https://docs.invidious.io/api/common_types/
+/// Shared thumbnail object as specified in <https://docs.invidious.io/api/common_types/>
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct CommonThumbnail {
     #[serde(default)]
@@ -22,7 +22,7 @@ pub struct CommonThumbnail {
     pub height: u32,
 }
 
-/// Shared video object as specified in https://docs.invidious.io/api/common_types/
+/// Shared video object as specified in <https://docs.invidious.io/api/common_types/>
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct CommonVideo {
     pub title: String,
@@ -66,7 +66,7 @@ pub struct CommonVideo {
     pub upcoming: bool,
 }
 
-/// Shared channel object as specified in https://docs.invidious.io/api/common_types/
+/// Shared channel object as specified in <https://docs.invidious.io/api/common_types/>
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct CommonChannel {
     #[serde(rename = "author")]
@@ -92,7 +92,7 @@ pub struct CommonChannel {
     pub description_html: String,
 }
 
-/// Shared playlist object as specified in https://docs.invidious.io/api/common_types/
+/// Shared playlist object as specified in <https://docs.invidious.io/api/common_types/>
 #[derive(Serialize, Deserialize, Debug, Clone, Default)]
 pub struct CommonPlaylist {
     pub title: String,
