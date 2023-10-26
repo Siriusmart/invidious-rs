@@ -8,8 +8,8 @@ pub struct Search {
 }
 
 impl PublicItems for Search {
-    fn url(server: &str, args: String) -> String {
-        format!("{}/api/v1/search/{}", server, args)
+    fn url(args: String) -> String {
+        format!("api/v1/search/{args}")
     }
 
     fn from_value(value: Value) -> Result<Self, InvidiousError>

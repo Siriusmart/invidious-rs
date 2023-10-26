@@ -7,7 +7,7 @@ pub struct Captions {
 }
 
 impl PublicItems for Captions {
-    fn url(server: &str, args: String) -> String {
-        format!("{server}/api/v1/captions/{args}")
+    fn url(args: String) -> String {
+        format!("api/v1/captions/{args}")
     }
 }

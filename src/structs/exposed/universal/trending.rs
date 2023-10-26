@@ -8,8 +8,8 @@ pub struct Trending {
 }
 
 impl PublicItems for Trending {
-    fn url(server: &str, args: String) -> String {
-        format!("{server}/api/v1/trending/{args}")
+    fn url(args: String) -> String {
+        format!("api/v1/trending/{args}")
     }
 
     fn from_value<'a>(value: Value) -> Result<Self, InvidiousError>

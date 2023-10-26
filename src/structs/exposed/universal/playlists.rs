@@ -30,8 +30,8 @@ pub struct Playlist {
 }
 
 impl PublicItems for Playlist {
-    fn url(server: &str, args: String) -> String {
-        format!("{}/api/v1/playlists/{}", server, args)
+    fn url(args: String) -> String {
+        format!("api/v1/playlists/{args}")
     }
 
     fn from_value(mut value: serde_json::Value) -> Result<Self, InvidiousError>

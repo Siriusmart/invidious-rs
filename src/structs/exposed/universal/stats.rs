@@ -15,7 +15,7 @@ pub struct Stats {
 }
 
 impl PublicItems for Stats {
-    fn url(server: &str, args: String) -> String {
-        format!("{}/api/v1/stats/{}", server, args)
+    fn url(args: String) -> String {
+        format!("api/v1/stats/{args}")
     }
 }

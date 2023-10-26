@@ -10,7 +10,7 @@ pub struct Mix {
 }
 
 impl PublicItems for Mix {
-    fn url(server: &str, args: String) -> String {
-        format!("{}/api/v1/mixes/{}", server, args)
+    fn url(args: String) -> String {
+        format!("api/v1/mixes/{args}")
     }
 }

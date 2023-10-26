@@ -38,7 +38,7 @@ pub trait PublicItems {
     where
         Self: Sized + DeserializeOwned,
     {
-        let url = Self::url(client.get_instance(), url_params(id, params));
+        let url = Self::url(url_params(id, params));
         let res = InvidiousError::as_fetch_error(client.fetch(&url))?;
         Self::from_str(res)
     }
@@ -53,7 +53,7 @@ pub trait PublicItems {
     where
         Self: Sized + DeserializeOwned,
     {
-        let url = Self::url(client.get_instance(), url_params(id, params));
+        let url = Self::url(url_params(id, params));
         let res = InvidiousError::as_fetch_error(client.fetch(&url).await)?;
         Self::from_str(res)
     }
@@ -75,5 +75,5 @@ pub trait PublicItems {
     }
 
     /// Returns the endpoint url.
-    fn url(server: &str, params: String) -> String;
+    fn url(params: String) -> String;
 }

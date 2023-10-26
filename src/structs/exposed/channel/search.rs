@@ -8,8 +8,8 @@ pub struct ChannelSearch {
 }
 
 impl PublicItems for ChannelSearch {
-    fn url(server: &str, args: String) -> String {
-        format!("{}/api/v1/channels/search/{}", server, args)
+    fn url(args: String) -> String {
+        format!("api/v1/channels/search/{args}")
     }
 
     fn from_value(value: Value) -> Result<Self, InvidiousError>

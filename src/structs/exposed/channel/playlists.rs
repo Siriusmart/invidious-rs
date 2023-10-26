@@ -8,7 +8,7 @@ pub struct ChannelPlaylists {
 }
 
 impl PublicItems for ChannelPlaylists {
-    fn url(server: &str, args: String) -> String {
-        format!("{server}/api/v1/channels/playlists/{args}")
+    fn url(args: String) -> String {
+        format!("api/v1/channels/playlists/{args}")
     }
 }

@@ -8,7 +8,7 @@ pub struct Suggestions {
 }
 
 impl PublicItems for Suggestions {
-    fn url(server: &str, args: String) -> String {
-        format!("{}/api/v1/search/suggestions/{}", server, args)
+    fn url(args: String) -> String {
+        format!("api/v1/search/suggestions/{args}")
     }
 }

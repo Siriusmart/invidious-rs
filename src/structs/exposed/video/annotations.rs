@@ -3,8 +3,8 @@ use crate::{traits::PublicItems, InvidiousError};
 pub type Annotations = String;
 
 impl PublicItems for Annotations {
-    fn url(server: &str, args: String) -> String {
-        format!("{server}/api/v1/annotations/{args}")
+    fn url(args: String) -> String {
+        format!("api/v1/annotations/{args}")
     }
 
     fn from_str<'a>(s: String) -> Result<Self, InvidiousError>

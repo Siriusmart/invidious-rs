@@ -68,7 +68,11 @@ impl ClientSyncTrait for ClientSync {
     }
 
     fn fetch(&self, url: &str) -> Result<String, Box<dyn Error>> {
-        self.method.fetch(url)
+        self.method.fetch(&format!(
+            "{}/{}",
+            self.instance,
+            url.trim_start_matches('/')
+        ))
     }
 }
 
@@ -141,7 +145,13 @@ impl ClientAsyncTrait for ClientAsync {
     }
 
     async fn fetch(&self, url: &str) -> Result<String, Box<dyn Error>> {
-        self.method.fetch(url).await
+        self.method
+            .fetch(&format!(
+                "{}/{}",
+                self.instance,
+                url.trim_start_matches('/')
+            ))
+            .await
     }
 }
 

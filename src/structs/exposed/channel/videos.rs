@@ -8,7 +8,7 @@ pub struct ChannelVideos {
 }
 
 impl PublicItems for ChannelVideos {
-    fn url(server: &str, args: String) -> String {
-        format!("{server}/api/v1/channels/videos/{args}")
+    fn url(args: String) -> String {
+        format!("api/v1/channels/videos/{args}")
     }
 }

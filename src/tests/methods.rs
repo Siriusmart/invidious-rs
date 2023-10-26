@@ -17,6 +17,16 @@ fn ureq_sync() {
 }
 
 #[test]
+fn leading_slash() {
+    ClientSync::default().fetch("/feed/popular").unwrap();
+}
+
+#[tokio::test]
+async fn leading_slash_async() {
+    ClientAsync::default().fetch("/feed/popular").await.unwrap();
+}
+
+#[test]
 fn httpreq_sync() {
     ClientSync::default()
         .method(MethodSync::HttpReq)
