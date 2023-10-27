@@ -9,8 +9,13 @@ fn videos() {
 
 #[test]
 fn comments() {
-    crate::ClientSync::default()
-        .comments("FhhyqkbtaR4", None)
+    let client = crate::ClientSync::default();
+    let comments = client.comments("FhhyqkbtaR4", None).unwrap();
+    client
+        .comments(
+            "FhhyqkbtaR4",
+            Some(&format!("continuation={}", comments.continuation.unwrap())),
+        )
         .unwrap();
 }
 
