@@ -3,6 +3,8 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Video {
+    #[serde(rename = "type")]
+    pub r#type: String,
     pub title: String,
     #[serde(rename = "videoId")]
     pub id: String,
@@ -32,7 +34,7 @@ pub struct Video {
     pub allowed_regions: Vec<CountryCode>,
     pub genre: String,
     #[serde(rename = "genreUrl")]
-    pub genre_url: String,
+    pub genre_url: Option<String>,
 
     pub author: String,
     #[serde(rename = "authorId")]

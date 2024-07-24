@@ -1,38 +1,50 @@
-use crate::ClientSyncTrait;
+use crate::ClientAsyncTrait;
 
-#[test]
-fn trending() {
-    crate::ClientSync::default().trending(None).unwrap();
+#[tokio::test]
+async fn trending() {
+    crate::ClientAsync::default()
+        .method(crate::MethodAsync::Isahc)
+        .trending(None).await.unwrap();
 }
 
-#[test]
-fn popular() {
-    crate::ClientSync::default().popular(None).unwrap();
+#[tokio::test]
+async fn popular() {
+    crate::ClientAsync::default()
+        .method(crate::MethodAsync::Isahc)
+        .popular(None).await.unwrap();
 }
 
-#[test]
-fn stats() {
-    crate::ClientSync::default().stats(None).unwrap();
+#[tokio::test]
+async fn stats() {
+    crate::ClientAsync::default()
+        .method(crate::MethodAsync::Isahc)
+        .stats(None).await.unwrap();
 }
 
-#[test]
-fn playlist() {
-    crate::ClientSync::default()
+#[tokio::test]
+async fn playlist() {
+    crate::ClientAsync::default()
+        .method(crate::MethodAsync::Isahc)
         .playlist("PLdgHTasZAjYaI2DUfqe70I82o9clPGyiO", None)
+        .await
         .unwrap();
 }
 
-#[test]
-fn search() {
-    crate::ClientSync::default()
+#[tokio::test]
+async fn search() {
+    crate::ClientAsync::default()
+        .method(crate::MethodAsync::Isahc)
         .search(Some("q=testing"))
+        .await
         .unwrap();
 }
 
-#[test]
-fn search_suggestions() {
-    assert!(!crate::ClientSync::default()
+#[tokio::test]
+async fn search_suggestions() {
+    assert!(!crate::ClientAsync::default()
+        .method(crate::MethodAsync::Isahc)
         .search_suggestions(Some("q=test"))
+        .await
         .unwrap()
         .suggestions
         .is_empty())

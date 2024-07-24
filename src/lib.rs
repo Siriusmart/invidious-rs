@@ -108,6 +108,8 @@
 //! - Make changes to outdated bindings structs.
 //! - Add new fetch methods with either faster compile time or runtime.
 //! - Improve documentation.
+//! 
+//! ***Only `isahc_async` is working on my machine, I don't know why, but now you know.***
 
 #![allow(clippy::module_inception)]
 #![allow(clippy::needless_doctest_main)]
@@ -123,7 +125,7 @@ pub use structs::*;
 pub use traits::*;
 
 /// Default instance used in `ClientSync/ClientAsync::default()`.
-pub const INSTANCE: &str = "https://vid.puffyan.us";
+pub const INSTANCE: &str = "https://invidious.fdn.fr";
 
 /// Some instances required a user agent to be set, but it is not implmented yet
 pub const USER_AGENT: &str = concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION"),);
