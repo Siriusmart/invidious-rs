@@ -11,8 +11,7 @@ async fn videos() {
 
 #[tokio::test]
 async fn comments() {
-    let client = crate::ClientAsync::default()
-        .method(crate::MethodAsync::Isahc);
+    let client = crate::ClientAsync::default().method(crate::MethodAsync::Isahc);
     let comments = client.comments("FhhyqkbtaR4", None).await.unwrap();
     client
         .comments(

@@ -4,21 +4,27 @@ use crate::ClientAsyncTrait;
 async fn trending() {
     crate::ClientAsync::default()
         .method(crate::MethodAsync::Isahc)
-        .trending(None).await.unwrap();
+        .trending(None)
+        .await
+        .unwrap();
 }
 
 #[tokio::test]
 async fn popular() {
     crate::ClientAsync::default()
         .method(crate::MethodAsync::Isahc)
-        .popular(None).await.unwrap();
+        .popular(None)
+        .await
+        .unwrap();
 }
 
 #[tokio::test]
 async fn stats() {
     crate::ClientAsync::default()
         .method(crate::MethodAsync::Isahc)
-        .stats(None).await.unwrap();
+        .stats(None)
+        .await
+        .unwrap();
 }
 
 #[tokio::test]
