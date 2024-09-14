@@ -48,7 +48,7 @@ enable the `isahc_async` feature and optionally disable the `reqwest_async` feat
 enabled).
 
 ```toml
-invidious = { version = "6.0", no-default-features = true, features = ["isahc_async"]}
+invidious = { version = "0.7", no-default-features = true, features = ["isahc_async"]}
 ```
 
 ```rust
@@ -98,6 +98,9 @@ The beginning question mark `?` is omitted.
 
 This crate includes structs for each of the API endpoints, and allowing users to include any extra parameters they want. Then uses the [serde](https://crates.io/crates/serde) crate to serialize and deserialize json responses from the [Invidious API](https://docs.invidious.io/api).
 
+On a related note, you may use [vidiup.siri.sh](https://github.com/siriusmart/vidiup) to look
+for instances with specific features enabled.
+
 ### Contributing
 
 Contributions are welcome! Make a pull request at [GitHub](https://github.com/siriusmart/invidious-rs) if you do.
@@ -106,4 +109,4 @@ Contributions are welcome! Make a pull request at [GitHub](https://github.com/si
 - Add new fetch methods with either faster compile time or runtime.
 - Improve documentation.
 
-License: GPL-3.0
+License: AGPL-3.0

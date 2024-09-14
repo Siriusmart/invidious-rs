@@ -47,7 +47,7 @@
 //! enabled).
 //!
 //! ```toml
-//! invidious = { version = "6.0", no-default-features = true, features = ["isahc_async"]}
+//! invidious = { version = "0.7", no-default-features = true, features = ["isahc_async"]}
 //! ```
 //!
 //! ```
@@ -101,6 +101,9 @@
 //!
 //! This crate includes structs for each of the API endpoints, and allowing users to include any extra parameters they want. Then uses the [serde](https://crates.io/crates/serde) crate to serialize and deserialize json responses from the [Invidious API](https://docs.invidious.io/api).
 //!
+//! On a related note, you may use [vidiup.siri.sh](https://github.com/siriusmart/vidiup) to look
+//! for instances with specific features enabled.
+//!
 //! ## Contributing
 //!
 //! Contributions are welcome! Make a pull request at [GitHub](https://github.com/siriusmart/invidious-rs) if you do.
@@ -108,8 +111,6 @@
 //! - Make changes to outdated bindings structs.
 //! - Add new fetch methods with either faster compile time or runtime.
 //! - Improve documentation.
-//!
-//! ***Only `isahc_async` is working on my machine, I don't know why, but now you know.***
 
 #![allow(clippy::module_inception)]
 #![allow(clippy::needless_doctest_main)]

@@ -3,7 +3,7 @@ use crate::ClientAsyncTrait;
 #[tokio::test]
 async fn videos() {
     crate::ClientAsync::default()
-        .method(crate::MethodAsync::Isahc)
+        .method(crate::MethodAsync::Reqwest)
         .video("FhhyqkbtaR4", None)
         .await
         .unwrap();
@@ -11,7 +11,7 @@ async fn videos() {
 
 #[tokio::test]
 async fn comments() {
-    let client = crate::ClientAsync::default().method(crate::MethodAsync::Isahc);
+    let client = crate::ClientAsync::default().method(crate::MethodAsync::Reqwest);
     let comments = client.comments("FhhyqkbtaR4", None).await.unwrap();
     client
         .comments(
@@ -25,7 +25,7 @@ async fn comments() {
 #[tokio::test]
 async fn captions() {
     crate::ClientAsync::default()
-        .method(crate::MethodAsync::Isahc)
+        .method(crate::MethodAsync::Reqwest)
         .captions("FhhyqkbtaR4", None)
         .await
         .unwrap();
@@ -34,7 +34,7 @@ async fn captions() {
 #[tokio::test]
 async fn upcoming() {
     crate::ClientAsync::default()
-        .method(crate::MethodAsync::Isahc)
+        .method(crate::MethodAsync::Reqwest)
         .video("WyqKuHQ5CE8", None)
         .await
         .unwrap();

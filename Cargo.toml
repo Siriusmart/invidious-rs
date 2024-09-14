@@ -13,7 +13,7 @@ repository = "https://github.com/Siriusmart/invidious-rs"
 # See more keys and their definitions at https://doc.rust-lang.org/cargo/reference/manifest.html
 
 [features]
-default = ["httpreq_sync","isahc_async"]
+default = ["httpreq_sync"]
 reqwest_sync = ["reqwest/blocking", "sync"]
 reqwest_async = ["reqwest", "async"]
 ureq_sync = ["dep:ureq", "sync"]
