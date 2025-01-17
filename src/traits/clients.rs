@@ -140,16 +140,16 @@ pub trait ClientAsyncTrait
 where
     Self: Sync + Sized,
 {
-    /// Creates new ClientSync from a given instance and method.
+    /// Creates new ClientAsync from a given instance and method.
     fn new(instance: String) -> Self;
 
-    /// Modifies the instance of the ClientSync.
+    /// Modifies the instance of the ClientAsync.
     fn set_instance(&mut self, instance: String);
 
     /// Returns the currently in use instance.
     fn get_instance(&self) -> &str;
 
-    /// Takes ownership of the instance and returns a new, modifed ClientSync with changed instance.
+    /// Takes ownership of the instance and returns a new, modifed ClientAsync with changed instance.
     fn instance(mut self, instance: String) -> Self {
         self.set_instance(instance);
         self
