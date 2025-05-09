@@ -4,7 +4,7 @@ use crate::ClientAsyncTrait;
 async fn videos() {
     crate::ClientAsync::default()
         .method(crate::MethodAsync::Reqwest)
-        .video("FhhyqkbtaR4", None)
+        .video("M3rGDpCG5FQ", None)
         .await
         .unwrap();
 }
@@ -12,10 +12,10 @@ async fn videos() {
 #[tokio::test]
 async fn comments() {
     let client = crate::ClientAsync::default().method(crate::MethodAsync::Reqwest);
-    let comments = client.comments("FhhyqkbtaR4", None).await.unwrap();
+    let comments = client.comments("M3rGDpCG5FQ", None).await.unwrap();
     client
         .comments(
-            "FhhyqkbtaR4",
+            "M3rGDpCG5FQ",
             Some(&format!("continuation={}", comments.continuation.unwrap())),
         )
         .await
@@ -26,16 +26,17 @@ async fn comments() {
 async fn captions() {
     crate::ClientAsync::default()
         .method(crate::MethodAsync::Reqwest)
-        .captions("FhhyqkbtaR4", None)
+        .captions("M3rGDpCG5FQ", None)
         .await
         .unwrap();
 }
 
+// currently not working due to upstream limitations
 #[tokio::test]
 async fn upcoming() {
     crate::ClientAsync::default()
         .method(crate::MethodAsync::Reqwest)
-        .video("WyqKuHQ5CE8", None)
+        .video("SbWpqQGVfTA", None)
         .await
         .unwrap();
 }

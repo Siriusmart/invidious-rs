@@ -38,7 +38,7 @@ pub struct Channel {
 }
 
 impl PublicItems for Channel {
-    fn url(args: String) -> String {
-        format!("api/v1/channels/{args}")
+    fn url(id: &str, params: &str) -> String {
+        format!("api/v1/channels/{id}{params}")
     }
 }

@@ -75,7 +75,7 @@ pub struct Video {
 }
 
 impl PublicItems for Video {
-    fn url(args: String) -> String {
-        format!("api/v1/videos/{args}")
+    fn url(id: &str, params: &str) -> String {
+        format!("api/v1/videos/{id}{params}")
     }
 }

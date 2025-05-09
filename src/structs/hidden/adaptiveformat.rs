@@ -26,7 +26,7 @@ pub struct AdaptiveFormat {
     #[serde(default)]
     pub encoding: String,
     #[serde(default)]
-    #[serde(rename = "qualityLabel")]
+    #[serde(rename = "quality")]
     pub quality: String,
     #[serde(default)]
     pub resolution: String,

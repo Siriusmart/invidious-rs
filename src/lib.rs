@@ -126,7 +126,7 @@ pub use structs::*;
 pub use traits::*;
 
 /// Default instance used in `ClientSync/ClientAsync::default()`.
-pub const INSTANCE: &str = "https://yt.artemislena.eu";
+pub const INSTANCE: &str = "https://invidious.f5.si";
 
 /// Some instances required a user agent to be set, but it is not implmented yet
 pub const USER_AGENT: &str = concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION"),);

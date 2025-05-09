@@ -8,8 +8,8 @@ pub struct Popular {
 }
 
 impl PublicItems for Popular {
-    fn url(args: String) -> String {
-        format!("api/v1/popular/{args}")
+    fn url(_id: &str, params: &str) -> String {
+        format!("api/v1/popular/{params}")
     }
 
     fn from_value(value: Value) -> Result<Self, InvidiousError>

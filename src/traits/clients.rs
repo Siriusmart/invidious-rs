@@ -80,7 +80,7 @@ where
         ChannelVideos::fetch_sync(self, Some(id), params)
     }
 
-    /// `/api/v1/channel/playlists/:ID` endpoint.
+    /// `/api/v1/channel/:ID/playlists` endpoint.
     fn channel_playlists(
         &self,
         id: &str,
@@ -89,7 +89,7 @@ where
         ChannelPlaylists::fetch_sync(self, Some(id), params)
     }
 
-    /// `/api/v1/channel/comments/:id` endpoint.
+    /// `/api/v1/channel/:id/comments` endpoint.
     fn channel_comments(
         &self,
         id: &str,
@@ -98,7 +98,7 @@ where
         ChannelComments::fetch_sync(self, Some(id), params)
     }
 
-    /// `/api/v1/channel/search/:id` endpoint.
+    /// `/api/v1/channel/:id/search?q=` endpoint.
     fn channel_search(
         &self,
         id: &str,

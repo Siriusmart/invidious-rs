@@ -12,7 +12,7 @@ pub struct Comments {
 }
 
 impl PublicItems for Comments {
-    fn url(args: String) -> String {
-        format!("api/v1/comments/{args}")
+    fn url(id: &str, params: &str) -> String {
+        format!("api/v1/comments/{id}{params}")
     }
 }
