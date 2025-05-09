@@ -112,7 +112,7 @@ pub struct CommonPlaylist {
     pub author_verified: bool,
 
     #[serde(rename = "videoCount")]
-    pub video_count: u32,
+    pub video_count: i32,
     pub videos: Vec<CommonPlaylistVideo>,
 }
 
@@ -170,7 +170,7 @@ impl From<Playlist> for CommonPlaylist {
             thumbnail: value.thumbnail,
             author: value.author,
             author_id: value.author_id,
-            video_count: value.video_count,
+            video_count: value.video_count as i32,
             videos: value
                 .videos
                 .into_iter()
