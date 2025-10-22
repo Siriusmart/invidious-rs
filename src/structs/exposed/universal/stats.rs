@@ -6,12 +6,12 @@ use serde::{Deserialize, Serialize};
 
 #[derive(Serialize, Deserialize, Debug, Clone)]
 pub struct Stats {
-    pub version: String,
+    pub version: Option<String>,
     pub software: Software,
+    pub registrations: Option<bool>,
     #[serde(rename = "openRegistrations")]
-    pub registrations: bool,
-    pub usage: Usage,
-    pub metadata: Metadata,
+    pub usage: Option<Usage>,
+    pub metadata: Option<Metadata>,
 }
 
 impl PublicItems for Stats {
