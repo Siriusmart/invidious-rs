@@ -120,13 +120,12 @@ pub mod functions;
 mod structs;
 mod tests;
 mod traits;
+mod instance;
 
 pub use errors::InvidiousError;
 pub use structs::*;
 pub use traits::*;
-
-/// Default instance used in `ClientSync/ClientAsync::default()`.
-pub const INSTANCE: &str = "https://invidious.f5.si";
+pub use instance::INSTANCE;
 
 /// Some instances required a user agent to be set, but it is not implmented yet
 pub const USER_AGENT: &str = concat!(env!("CARGO_PKG_NAME"), "/", env!("CARGO_PKG_VERSION"),);
